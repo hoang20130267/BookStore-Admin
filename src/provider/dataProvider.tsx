@@ -6,65 +6,35 @@ const httpClient = fetchUtils.fetchJson
 // @ts-ignore
 export const dataProvider: DataProvider = {
     // @ts-ignore
-    getList: async () => {
+    getList: async (resource: any, params: any) => {
+        const {page, perPage} = params.pagination;
+        const {field, order} = params.sort;
+        const query = {
+            filter: JSON.stringify(fetchUtils.flattenObject(params.filter)),
+            sort: field,
+            order: order,
+            page: page - 1,
+            perPage: perPage,
+        };
         try {
-            const { json } = await httpClient(`${apiUrl}/blog/all`, {
+            const url = `${apiUrl}/${resource}?${fetchUtils.queryParameters(query)}`;
+            const { json } = await httpClient(url, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 }),
             });
-
+            console.log('response', json)
             return {
-                data: json,
-                total: json.length,
-            };
-
-        } catch (err: any) {
-
+                data: json.content,
+                total: parseInt(json.totalElements, 10),
+            }
+        } catch (error) {
+            // Xử lý lỗi ở đây
+            console.error('Error fetching data:', error);
+            throw new Error('Error fetching data');
         }
-    },
-    getOne: (resource: any, params: any) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: 'GET',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            }),
-        }).then(({json}) => {
-            return ({
-                data: json
-            })
-        }),
-    // @ts-ignore
-    create: async (resource: any, params: any) => {
-        console.log(params)
-        // try {
-        const {json} = await httpClient(`${apiUrl}/${resource}`, {
-            method: 'POST',
-            body: JSON.stringify(params.data),
-
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            }),
-        })
-        window.location.href = `/#/${resource}`
-        return Promise.resolve({data: json});
-    }
-    ,
-    update: async (resource: any, params: any) => {
-        console.log(params)
-        const {json} = await httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: 'PUT',
-            body: JSON.stringify(params.data),
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            }),
-        })
-        return Promise.resolve({data: json});
     },
 }
 

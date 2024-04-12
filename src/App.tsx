@@ -8,7 +8,7 @@ function App() {
           dataProvider={dataProvider}
           disableTelemetry
       >
-        <Resource name={'blogs'} list={BlogList} options={{label: "Bài viết"}}/>
+        <Resource name={'blog'} list={BlogList} options={{label: "Bài viết"}}/>
       </Admin>
   );
 }

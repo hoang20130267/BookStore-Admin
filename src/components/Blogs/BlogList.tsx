@@ -34,8 +34,8 @@ export const BlogList = () => (
             }
         >
             <TextField source="id" label="ID"/>
-            <TextField source="blog_cate_id.name" label="Danh mục"/>
-            <ImageField source="image" label="Hình ảnh"/>
+            <TextField source="blogCate.name" label="Danh mục"/>
+            <ImageField source="image" label="Hình ảnh" sx={{ '& img': { maxWidth: 100, maxHeight: 50, objectFit: 'contain' } }}/>
             <TextField source="creator.username" label="Người tạo"/>
             <TextField source="title" label="Tiêu đề"/>
             <DateField source="created_at" label="Ngày tạo"/>

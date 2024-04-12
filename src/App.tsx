@@ -1,6 +1,7 @@
 import {Admin, Resource, useGetList} from "react-admin";
 import {dataProvider} from "./provider/dataProvider";
 import {BlogList} from "./components/Blogs/BlogList";
+import {CreateBlog} from "./components/Blogs/CreateBlog";
 function App() {
   return (
       <Admin
@@ -8,7 +9,7 @@ function App() {
           dataProvider={dataProvider}
           disableTelemetry
       >
-        <Resource name={'blog'} list={BlogList} options={{label: "Bài viết"}}/>
+        <Resource name={'blog'} list={BlogList} options={{label: "Bài viết"}} create={CreateBlog}/>
       </Admin>
   );
 }

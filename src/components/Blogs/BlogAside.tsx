@@ -1,6 +1,5 @@
 import {Card, CardContent} from '@mui/material';
-import {FilterLiveSearch, FilterList, FilterListItem} from 'react-admin';
-import LockIcon from '@mui/icons-material/Lock';
+import {FilterLiveSearch} from 'react-admin';
 
 export const BlogAside = () => {
     return (
@@ -13,11 +12,7 @@ export const BlogAside = () => {
             }}
         >
             <CardContent>
-                <FilterLiveSearch label={'Tìm...'} name={'search'}/>
-                <FilterList label={'Trạng thái'} icon={<LockIcon/>}>
-                    <FilterListItem label={'Hoạt động'} value={{status: true}}/>
-                    <FilterListItem label={'Bị khóa'} value={{status: false}}/>
-                </FilterList>
+                <FilterLiveSearch label={'Tìm kiếm'} name={'search'}/>
             </CardContent>
         </Card>
     )

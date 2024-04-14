@@ -4,7 +4,7 @@ import {
     CreateButton,
     ExportButton,
     TopToolbar,
-    SelectColumnsButton,DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
+    SelectColumnsButton, DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
 } from 'react-admin';
 import {
     List,
@@ -23,7 +23,7 @@ const VisitorListActions = () => (
 export const BlogList = () => (
     <List sort={{field: 'title', order: 'DESC'}} perPage={5}
           actions={<VisitorListActions/>}
-        filters={<BlogSearch/>}
+          filters={<BlogSearch/>}
           sx={{
               '& .column-title': {
                   maxWidth: '16em',
@@ -47,8 +47,9 @@ export const BlogList = () => (
         >
             <TextField source="id" label="ID"/>
             <TextField source="blogCate.name" label="Danh mục"/>
-            <ImageField source="image" label="Hình ảnh" sx={{ '& img': { maxWidth: 100, maxHeight: 50, objectFit: 'contain' } }}/>
-            <TextField source="creator.username" label="Người tạo"/>
+            <ImageField source="image" label="Hình ảnh"
+                        sx={{'& img': {maxWidth: 100, maxHeight: 50, objectFit: 'contain'}}}/>
+            <TextField source="created_by.username" label="Người tạo"/>
             <TextField source="title" label="Tiêu đề"/>
             <DateField source="created_at" label="Ngày tạo"/>
         </DatagridConfigurable>

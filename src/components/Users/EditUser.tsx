@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {
-    Create,
+    Edit,
     SimpleForm,
     TextInput,
-    PasswordInput,
     SelectInput,
+    EditButton,
     email,
 } from 'react-admin';
 import { Box, Typography } from '@mui/material';
@@ -12,9 +12,6 @@ export const validateForm = (
     values: Record<string, any>
 ): Record<string, any> => {
     const errors = {} as any;
-    if (!values.username) {
-        errors.username = 'Vui lòng nhập tên tài khoản';
-    }
     if (!values.fullName) {
         errors.fullName = 'Vui lòng nhập họ tên';
     }
@@ -24,9 +21,6 @@ export const validateForm = (
     if (!values.avatar) {
         errors.avatar = 'Vui lòng nhập đường dẫn ảnh đại diện';
     }
-    if (!values.password) {
-        errors.password = 'Vui lòng nhập mật khẩu';
-    }
     if (!values.email) {
         errors.email = 'Vui lòng nhập đúng định dạng email';
     } else {
@@ -35,14 +29,10 @@ export const validateForm = (
             errors.email = error;
         }
     }
-    if (values.password && values.password !== values.confirm_password) {
-        errors.confirm_password =
-            'Mật khẩu không khớp. Vui lòng nhập lại mật khẩu.';
-    }
     return errors;
 };
-export const AddUser = () => (
-    <Create>
+export const EditUser = () => (
+    <Edit>
         <SimpleForm
             sx={{ maxWidth: 500 }}
             // Here for the GQL provider
@@ -60,9 +50,10 @@ export const AddUser = () => (
             validate={validateForm}
         >
             <SectionTitle label="Thông tin cá nhân" />
+            <TextInput source="id" disabled fullWidth />
             <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
                 <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                    <TextInput source="username" isRequired fullWidth />
+                    <TextInput source="username" disabled isRequired fullWidth />
                 </Box>
                 <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
                     <TextInput source="fullName" isRequired fullWidth />
@@ -70,24 +61,23 @@ export const AddUser = () => (
             </Box>
             <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
                 <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-            <TextInput type="phone" source="phone" isRequired fullWidth />
+                    <TextInput type="phone" source="phone" isRequired fullWidth />
                 </Box>
                 <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-            <TextInput type="avatar" source="avatar" isRequired fullWidth />
+                    <TextInput type="avatar" source="avatar" isRequired fullWidth />
                 </Box>
             </Box>
             <TextInput type="email" source="email" isRequired fullWidth />
             <Separator />
             <SectionTitle label="Chức năng" />
-                <SelectInput
-                    source="role"
-                    choices={[
-                        { id: 1, name: 'ADMIN' },
-                        { id: 2, name: 'MODERATOR' },
-                        { id: 3, name: 'USER' },
-                    ]}
-                    defaultValue={3}
-                />
+            <SelectInput
+                source="role"
+                choices={[
+                    { id: 1, name: 'ADMIN' },
+                    { id: 2, name: 'MODERATOR' },
+                    { id: 3, name: 'USER' },
+                ]}
+            />
             <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
                 <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
                     <SelectInput
@@ -96,7 +86,6 @@ export const AddUser = () => (
                             { id: false, name: 'Unlocked' },
                             { id: true, name: 'Locked' },
                         ]}
-                        defaultValue={1}
                     />
                 </Box>
                 <Box flex={1} ml={{ xs: 0, sm: '0.1em' }}>
@@ -110,18 +99,8 @@ export const AddUser = () => (
                     />
                 </Box>
             </Box>
-            <Separator />
-            <SectionTitle label="Mật khẩu" />
-            <Box display={{ xs: 'block', sm: 'flex' }}>
-                <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                    <PasswordInput source="password" fullWidth />
-                </Box>
-                <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                    <PasswordInput source="confirm_password" fullWidth />
-                </Box>
-            </Box>
         </SimpleForm>
-    </Create>
+    </Edit>
 );
 const SectionTitle = ({ label }: { label: string }) => {
 

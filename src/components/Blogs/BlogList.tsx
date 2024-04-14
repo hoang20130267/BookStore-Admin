@@ -10,7 +10,9 @@ import {
     List,
     ImageField,
     TextField,
-    DateField
+    DateField,
+    EditButton,
+    DeleteButton,
 } from "react-admin";
 
 const VisitorListActions = () => (
@@ -52,6 +54,8 @@ export const BlogList = () => (
             <TextField source="created_by.username" label="Người tạo"/>
             <TextField source="title" label="Tiêu đề"/>
             <DateField source="created_at" label="Ngày tạo"/>
+            <EditButton />
+            <DeleteButton />
         </DatagridConfigurable>
     </List>
 );

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {UserSearch} from "./UserSearch";
+import { EditButton, DeleteButton } from 'react-admin';
 import {
     CreateButton,
     ExportButton,
@@ -64,6 +65,8 @@ export const UserList = () => (
             />
             <DateField source="createdAt" label="Ngày tạo" showTime/>
             <DateField source="updatedAt" label="Ngày cập nhật" showTime/>
+            <EditButton />
+            <DeleteButton />
         </DatagridConfigurable>
     </List>
 );

@@ -25,7 +25,7 @@ export const dataProvider: DataProvider = {
                     Accept: 'application/json',
                 }),
             });
-            console.log('response', json)
+            // console.log('response', json)
             return {
                 data: json.content,
                 total: parseInt(json.totalElements, 10),
@@ -36,6 +36,21 @@ export const dataProvider: DataProvider = {
             throw new Error('Error fetching data');
         }
     },
+    getOne: (resource: any, params: any) =>
+        httpClient(`${apiUrl}/${resource}/${params.id}`, {
+            method: 'GET',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }),
+            credentials: 'include',
+        }).then(({json}) => {
+            return ({
+                data: resource === 'user' ? {
+                    ...json
+                } : json
+            })
+        }),
     create: async (resource: any, params: any) => {
         try {
             const url = `${apiUrl}/${resource}/add`;
@@ -57,6 +72,51 @@ export const dataProvider: DataProvider = {
             throw new Error('Error fetching data');
         }
     },
+    update: async (resource: any, params: any) => {
+        if (!params || !params.data) {
+            console.error('params.data is undefined');
+            return Promise.resolve({ data: { id: params.id } });
+        }
+
+        try {
+            const response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(params.data),
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                }),
+                credentials: 'include'
+            })
+
+            if (!response || !response.json) {
+                console.error('response.json is undefined');
+                return Promise.resolve({ data: { id: params.id } });
+            }
+
+            console.log('response', response.json)
+            window.location.href = `/#/${resource}`;
+            return Promise.resolve({data: { id: params.id, ...response.json }});
+        } catch (error) {
+            console.error('Error updating data:', error);
+            return Promise.resolve({ data: { id: params.id } });
+        }
+    },
+
+    updateMany: (resource: any, params: any) => Promise.resolve({data: []}),
+
+    delete: (resource: any, params: any) =>
+        httpClient(`${apiUrl}/${resource}/delete/${params.id}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }),
+            credentials: 'include'
+        }).then(({json}) => ({
+            data: json,
+        })),
+    deleteMany: (resource: any, params: any) => Promise.resolve({data: []}),
 }
 
 // export default dataProvider

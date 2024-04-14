@@ -7,6 +7,8 @@ import {CreateBlog} from "./components/Blogs/CreateBlog";
 import {UserList} from "./components/Users/UserList";
 import {AddUser} from "./components/Users/AddUser";
 import {EditUser} from "./components/Users/EditUser";
+import CategoryList from "./components/categories/CategoryList";
+import CategoryIcon from "@mui/icons-material/Category";
 
 function App() {
     return (
@@ -20,6 +22,7 @@ function App() {
         >
             <Resource name={'user'} list={UserList} options={{label: "Người dùng"}} create={AddUser} edit={EditUser}/>
             <Resource name={'blog'} list={BlogList} options={{label: "Bài viết"}} create={CreateBlog}/>
+            <Resource name="categories" options={{label: 'Danh mục'}} list={CategoryList} icon={CategoryIcon}/>
         </Admin>
     );
 }

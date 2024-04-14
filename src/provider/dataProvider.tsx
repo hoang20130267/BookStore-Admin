@@ -2,14 +2,7 @@ import {DataProvider, fetchUtils} from 'react-admin'
 
 const apiUrl = 'http://localhost:8080/api'
 const httpClient = fetchUtils.fetchJson
-const adminInfo = {
-    token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJob2FuZ25ndXllbiIsImlhdCI6MTcxMjkwODQ3MCwiZXhwIjoxNzEyOTk0ODcwfQ.7s-m9KyYJyhFXjcNC_5tsRWKXVkTwqMJGmtOyFKsalFW5FWTL8dzEC1MhcMHy1YOOUWR20KpEtzr4LtAtuH0Xg",
-    type: "Bearer",
-    id: 1,
-    username: "hoangnguyen",
-    email: "shuter.nsh@gmail.com",
-    roles: ["ADMIN"]
-};
+const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 // @ts-ignore
 export const dataProvider: DataProvider = {
     // @ts-ignore

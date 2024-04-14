@@ -1,17 +1,18 @@
 import * as React from 'react';
-import {BlogSearch} from "./BlogSearch";
+import {UserSearch} from "./UserSearch";
 import {
     CreateButton,
     ExportButton,
     TopToolbar,
-    SelectColumnsButton, DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
+    SelectColumnsButton,DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
 } from 'react-admin';
 import {
     List,
-    ImageField,
     TextField,
-    DateField
+    DateField,
+    BooleanField
 } from "react-admin";
+import { Avatar} from '@mui/material';
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -20,10 +21,10 @@ const VisitorListActions = () => (
         <ExportButton/>
     </TopToolbar>
 );
-export const BlogList = () => (
-    <List sort={{field: 'title', order: 'DESC'}} perPage={5}
+export const UserList = () => (
+    <List sort={{field: 'id', order: 'ASC'}} perPage={5}
           actions={<VisitorListActions/>}
-          filters={<BlogSearch/>}
+          filters={<UserSearch/>}
           sx={{
               '& .column-title': {
                   maxWidth: '16em',
@@ -46,12 +47,23 @@ export const BlogList = () => (
             }
         >
             <TextField source="id" label="ID"/>
-            <TextField source="blogCate.name" label="Danh mục"/>
-            <ImageField source="image" label="Hình ảnh"
-                        sx={{'& img': {maxWidth: 100, maxHeight: 50, objectFit: 'contain'}}}/>
-            <TextField source="created_by.username" label="Người tạo"/>
-            <TextField source="title" label="Tiêu đề"/>
-            <DateField source="created_at" label="Ngày tạo"/>
+            <TextField source="fullName" label="Người tạo"/>
+            <Avatar
+                src="avatar"
+                style={{ width: parseInt("25", 10), height: parseInt("25", 10) }}
+            />
+            <TextField source="email" label="Email"/>
+            <TextField source="phoneNumber" label="Số điện thoại"/>
+            <BooleanField
+                source="locked"
+                sx={{ mt: -0.5, mb: -0.5 }}
+            />
+            <BooleanField
+                source="isSocial"
+                sx={{ mt: -0.5, mb: -0.5 }}
+            />
+            <DateField source="createdAt" label="Ngày tạo" showTime/>
+            <DateField source="updatedAt" label="Ngày cập nhật" showTime/>
         </DatagridConfigurable>
     </List>
 );

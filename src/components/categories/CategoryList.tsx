@@ -1,11 +1,12 @@
 import {
     CreateButton,
-    Datagrid, DatagridConfigurable,
+    DatagridConfigurable,
     ExportButton,
-    FilterButton, FilterLiveSearch,
-    List, SearchInput,
+    List,
+    SearchInput,
     SelectColumnsButton,
-    TextField, TextInput,
+    TextField,
+    TextInput,
     TopToolbar
 } from "react-admin";
 

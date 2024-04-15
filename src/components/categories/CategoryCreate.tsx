@@ -8,7 +8,7 @@ export const CategoryCreate = () => {
     console.log(parentCategories);
 
     const {data}: any = useGetList<Category>('categories', {
-        filter: {parentId: null},
+        filter: {parentId: null, active: true},
         sort: {field: 'name', order: 'ASC'},
         pagination: {page: 1, perPage: 100}
     });
@@ -18,14 +18,24 @@ export const CategoryCreate = () => {
             setParentCategories(data);
         }
     }, [data]);
-    return (<Create>
-        <SimpleForm>
-            <TextInput source="name" label="Tên danh mục" validate={[required()]}/>
-            <SelectInput
-                source="parentId"
-                label="Danh mục cha"
-                choices={parentCategories}
-            />
-        </SimpleForm>
-    </Create>)
+    return (
+        <Create title="Thêm danh mục">
+            <SimpleForm>
+                <TextInput source="name" label="Tên danh mục" validate={[required()]}/>
+                <SelectInput
+                    source="parentId"
+                    label="Danh mục cha"
+                    choices={parentCategories}
+                />
+                <SelectInput
+                    source="active"
+                    label="Trạng thái"
+                    choices={[
+                        {id: true, name: 'Active'},
+                        {id: false, name: 'Inactive'},
+                    ]}
+                    defaultValue="true"
+                />
+            </SimpleForm>
+        </Create>)
 };

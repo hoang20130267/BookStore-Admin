@@ -1,12 +1,11 @@
 import {
     CreateButton,
-    DatagridConfigurable,
+    Datagrid, DatagridConfigurable,
     ExportButton,
-    List,
-    SearchInput,
+    FilterButton, FilterLiveSearch,
+    List, SearchInput,
     SelectColumnsButton,
-    TextField,
-    TextInput,
+    TextField, TextInput,
     TopToolbar
 } from "react-admin";
 
@@ -19,20 +18,22 @@ const ListActions = () => (
 );
 const postFilters = [
     <SearchInput source="name" alwaysOn/>,
-    <TextInput label="Tên danh mục" source="name" />,
+    // <TextInput label="Tên danh mục" source="name" />,
 ];
 const CategoryList = () => (
     <List sort={{field: 'id', order: 'ASC'}}
           filters={postFilters}
-          actions={<ListActions/>}>
+          actions={<ListActions/>}
+          pagination={false}
+    >
         <DatagridConfigurable rowClick="show">
             <TextField source="id"/>
-            <TextField source="parentCategory.name" label="Danh mục cha"/>
+            {/*<TextField source="parentId" label="Danh mục cha"/>*/}
             <TextField source="name" label="Tên danh mục"/>
-            <TextField source="created_by.username" label="Tạo bởi"/>
-            <TextField source="created_at" label="Ngày tạo"/>
-            <TextField source="updated_by.username" label="Cập nhật bởi"/>
-            <TextField source="updated_at" label="Ngày cập nhật"/>
+            <TextField source="createdBy.username" label="Tạo bởi"/>
+            <TextField source="createdAt" label="Ngày tạo"/>
+            <TextField source="updatedBy.username" label="Cập nhật bởi"/>
+            <TextField source="updatedAt" label="Ngày cập nhật"/>
         </DatagridConfigurable>
     </List>
 );

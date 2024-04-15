@@ -8,5 +8,5 @@ export interface Category extends RaRecord{
     createdAt: string;
     updatedBy: string;
     updatedAt: string;
-
+    active: boolean;
 }

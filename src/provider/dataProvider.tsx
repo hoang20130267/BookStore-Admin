@@ -83,6 +83,7 @@ export const dataProvider: DataProvider = {
                 method: 'PUT',
                 body: JSON.stringify(params.data),
                 headers: new Headers({
+                    'Authorization': `${adminInfo.type} ${adminInfo.token}`,
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 }),

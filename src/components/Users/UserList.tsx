@@ -48,13 +48,13 @@ export const UserList = () => (
             }
         >
             <TextField source="id" label="ID"/>
-            <TextField source="fullName" label="Người tạo"/>
+            <TextField source="userInfo.fullName" label="Họ và tên "/>
             <Avatar
                 src="avatar"
                 style={{ width: parseInt("25", 10), height: parseInt("25", 10) }}
             />
             <TextField source="email" label="Email"/>
-            <TextField source="phoneNumber" label="Số điện thoại"/>
+            <TextField source="userInfo.phoneNumber" label="Số điện thoại"/>
             <BooleanField
                 source="locked"
                 sx={{ mt: -0.5, mb: -0.5 }}
@@ -63,8 +63,8 @@ export const UserList = () => (
                 source="isSocial"
                 sx={{ mt: -0.5, mb: -0.5 }}
             />
-            <DateField source="createdAt" label="Ngày tạo" showTime/>
-            <DateField source="updatedAt" label="Ngày cập nhật" showTime/>
+            <DateField source="createdAt" label="Ngày tạo" showDate showTime={false}/>
+            <DateField source="updatedAt" label="Ngày cập nhật" showDate showTime={false}/>
             <EditButton />
             <DeleteButton />
         </DatagridConfigurable>

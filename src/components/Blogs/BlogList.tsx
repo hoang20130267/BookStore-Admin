@@ -51,9 +51,9 @@ export const BlogList = () => (
             <TextField source="blogCate.name" label="Danh mục"/>
             <ImageField source="image" label="Hình ảnh"
                         sx={{'& img': {maxWidth: 100, maxHeight: 50, objectFit: 'contain'}}}/>
-            <TextField source="created_by.username" label="Người tạo"/>
+            <TextField source="createdBy.username" label="Người tạo"/>
             <TextField source="title" label="Tiêu đề"/>
-            <DateField source="created_at" label="Ngày tạo"/>
+            <DateField source="createdAt" label="Ngày tạo"/>
             <EditButton />
             <DeleteButton />
         </DatagridConfigurable>

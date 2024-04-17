@@ -4,18 +4,18 @@ import {useEffect, useState} from "react";
 import {Category} from "../../type";
 
 export const CategoryCreate = () => {
-    const [parentCategories, setParentCategories] = useState<Category[]>([]);
-    console.log(parentCategories);
+    const [mainCategories, setMainCategories] = useState<Category[]>([]);
+    console.log(mainCategories);
 
     const {data}: any = useGetList<Category>('categories', {
-        filter: {parentId: null, active: true},
+        filter: {parentCategory: 1, active: true},
         sort: {field: 'name', order: 'ASC'},
         pagination: {page: 1, perPage: 100}
     });
 
     useEffect(() => {
         if (data) {
-            setParentCategories(data);
+            setMainCategories(data);
         }
     }, [data]);
     return (
@@ -23,9 +23,9 @@ export const CategoryCreate = () => {
             <SimpleForm>
                 <TextInput source="name" label="Tên danh mục" validate={[required()]}/>
                 <SelectInput
-                    source="parentId"
+                    source="parentCategory.id"
                     label="Danh mục cha"
-                    choices={parentCategories}
+                    choices={mainCategories}
                 />
                 <SelectInput
                     source="active"

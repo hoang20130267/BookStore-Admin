@@ -1,9 +1,9 @@
 import {RaRecord} from "react-admin";
 
-export interface Category extends RaRecord{
+export interface Category extends RaRecord {
     id: number;
     name: string;
-    parentId: number|null;
+    parentCategory: Category | null;
     createdBy: string;
     createdAt: string;
     updatedBy: string;

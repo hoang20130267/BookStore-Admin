@@ -4,17 +4,17 @@ import {useEffect, useState} from "react";
 import {Category} from "../../type";
 
 export const CategoryEdit = () => {
-    const [parentCategories, setParentCategories] = useState<Category[]>([]);
+    const [mainCategories, setMainCategories] = useState<Category[]>([]);
 
     const {data}: any = useGetList<Category>('categories', {
-        filter: {parentId: null, active: true},
+        filter: {parentCategory: 1, active: true},
         sort: {field: 'name', order: 'ASC'},
         pagination: {page: 1, perPage: 100}
     });
 
     useEffect(() => {
         if (data) {
-            setParentCategories(data);
+            setMainCategories(data);
         }
     }, [data]);
     return (<Edit title="Chỉnh sửa danh mục">
@@ -22,9 +22,9 @@ export const CategoryEdit = () => {
             <TextInput source="id" label="ID" disabled/>
             <TextInput source="name" label="Tên danh mục" validate={[required()]}/>
             <SelectInput
-                source="parentId"
+                source="parentCategory.id"
                 label="Danh mục cha"
-                choices={parentCategories}
+                choices={mainCategories}
             />
             <SelectInput
                 source="active"

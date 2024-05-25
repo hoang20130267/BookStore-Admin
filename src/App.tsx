@@ -13,6 +13,9 @@ import {CategoryCreate} from "./components/categories/CategoryCreate";
 import {CategoryEdit} from "./components/categories/CategoryEdit";
 import {ProductList} from "./components/products/ProductList";
 import InventoryIcon from '@mui/icons-material/Inventory';
+import People from '@mui/icons-material/People';
+import ArticleIcon from '@mui/icons-material/Article';
+import {EditBlog} from "./components/Blogs/EditBlog";
 
 function App() {
     return (
@@ -24,9 +27,18 @@ function App() {
             theme={houseLightTheme}
             disableTelemetry
         >
-            <Resource name={'user'} list={UserList} options={{label: "Người dùng"}} create={AddUser} edit={EditUser}/>
-            <Resource name={'blog'} list={BlogList} options={{label: "Bài viết"}} create={CreateBlog}/>
-            <Resource name="categories" options={{label: 'Danh mục'}} list={CategoryList} create={CategoryCreate}
+            <Resource name={'user'} icon={People} list={UserList}
+                      options={{label: "Người dùng"}}
+                      create={AddUser}
+                      edit={EditUser}/>
+            <Resource name={'blog'} icon={ArticleIcon} list={BlogList}
+                      options={{label: "Bài viết"}}
+                      create={CreateBlog}
+                      edit={EditBlog}/>
+            <Resource name="categories"
+                      options={{label: 'Danh mục'}}
+                      list={CategoryList}
+                      create={CategoryCreate}
                       edit={CategoryEdit}
                       icon={CategoryIcon}/>
             <Resource name="products" options={{label: 'Sản phẩm'}} list={ProductList} icon={InventoryIcon}/>

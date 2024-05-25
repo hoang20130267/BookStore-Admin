@@ -17,7 +17,10 @@ export const dataProvider: DataProvider = {
             perPage: perPage,
         };
         try {
-            const url = `${apiUrl}/${resource}?${fetchUtils.queryParameters(query)}`;
+            let url = `${apiUrl}/${resource}?${fetchUtils.queryParameters(query)}`;
+            if(resource === 'category') {
+                url = `${apiUrl}/blogCate?${fetchUtils.queryParameters(query)}`;
+            }
             const { json } = await httpClient(url, {
                 method: 'GET',
                 headers: new Headers({
@@ -25,13 +28,11 @@ export const dataProvider: DataProvider = {
                     Accept: 'application/json',
                 }),
             });
-            // console.log('response', json)
-            return {
-                data: json.content,
-                total: parseInt(json.totalElements, 10),
+                return {
+                    data: json.content,
+                    total: parseInt(json.totalElements, 10),
             }
         } catch (error) {
-            // Xử lý lỗi ở đây
             console.error('Error fetching data:', error);
             throw new Error('Error fetching data');
         }
@@ -51,6 +52,37 @@ export const dataProvider: DataProvider = {
                 } : json
             })
         }),
+    getMany: async (resource: any, params: any) => {
+        const {page, perPage} = params.pagination;
+        const {field, order} = params.sort;
+        const query = {
+            filter: JSON.stringify({
+                ...fetchUtils.flattenObject(params.filter),
+                [params.target]: params.id,
+            }),
+            sort: field,
+            order: order,
+            page: page - 1,
+            perPage: perPage,
+        };
+        try {
+            const {json} = await httpClient(`${apiUrl}/${resource}/id?${fetchUtils.queryParameters(query)}`, {
+                method: 'GET',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                }),
+                credentials: 'include',
+            });
+            return {
+                data: json.content,
+                total: parseInt(json.totalElements, 10),
+            };
+        } catch (error: any) {
+            console.log(error)
+            return Promise.reject({message: error.response.data.message});
+        }
+    },
     create: async (resource: any, params: any) => {
         try {
             const url = `${apiUrl}/${resource}/add`;

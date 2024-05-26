@@ -85,21 +85,47 @@ export const dataProvider: DataProvider = {
     },
     create: async (resource: any, params: any) => {
         try {
+            let imageUrl = '';
+            if (params.data.image.rawFile instanceof File) {
+                const formData = new FormData();
+                formData.append('image', params.data.image.rawFile);
+
+                const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+                imageUrl = data.data.url;
+            }
             const url = `${apiUrl}/${resource}/add`;
-            const { json } = await httpClient(url, {
-                method: 'POST',
-                body: JSON.stringify(params.data),
-                headers: new Headers({
-                    'Authorization': `${adminInfo.type} ${adminInfo.token}`,
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-            });
-            console.log('response', json)
-            window.location.href = `/#/${resource}`;
-            return Promise.resolve({data: json});
+
+            if(resource === 'user' && resource === 'blog') {
+                const {json} = await httpClient(url, {
+                    method: 'POST',
+                    body: JSON.stringify({...params.data, image: imageUrl}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                });
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: json});
+            } else {
+                const {json} = await httpClient(url, {
+                    method: 'POST',
+                    body: JSON.stringify(params.data),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                });
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: json});
+            }
         } catch (error) {
-            // Xử lý lỗi ở đây
             console.error('Error fetching data:', error);
             throw new Error('Error fetching data');
         }

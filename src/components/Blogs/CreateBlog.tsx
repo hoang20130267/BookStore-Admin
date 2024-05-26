@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SimpleForm, ReferenceInput, SelectInput, useGetList, required} from "react-admin";
+import {SimpleForm, SelectInput, useGetList, required, ImageField, ImageInput} from "react-admin";
 import {Create, TextInput} from "react-admin";
 import { RichTextInput } from 'ra-input-rich-text';
 import {useEffect, useState} from "react";
@@ -18,6 +18,7 @@ export const CreateBlog = () => {
             setCategories(data);
         }
     }, [data]);
+
     return (
         <Create title={'Tạo tin tức'}>
             <SimpleForm>
@@ -36,7 +37,9 @@ export const CreateBlog = () => {
                         />
                     </Box>
                 </Box>
-                <TextInput source="image" label="Link hình ảnh"/>
+                <ImageInput source="image" accept="image/*" label="Link hình ảnh" placeholder={<p>Chọn ảnh</p>}>
+                    <ImageField source={"src"} title=""/>
+                </ImageInput>
                 <RichTextInput source="content" label="Nội dung" />
             </SimpleForm>
         </Create>

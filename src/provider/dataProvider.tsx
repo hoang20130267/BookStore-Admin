@@ -18,19 +18,19 @@ export const dataProvider: DataProvider = {
         };
         try {
             let url = `${apiUrl}/${resource}?${fetchUtils.queryParameters(query)}`;
-            if(resource === 'category') {
+            if (resource === 'category') {
                 url = `${apiUrl}/blogCate?${fetchUtils.queryParameters(query)}`;
             }
-            const { json } = await httpClient(url, {
+            const {json} = await httpClient(url, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 }),
             });
-                return {
-                    data: json.content,
-                    total: parseInt(json.totalElements, 10),
+            return {
+                data: json.content,
+                total: parseInt(json.totalElements, 10),
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -46,6 +46,12 @@ export const dataProvider: DataProvider = {
             }),
             credentials: 'include',
         }).then(({json}) => {
+            if(resource === 'blog') {
+                json.imageShow = json.image;
+                delete json.image;
+                json.blogCate = json.blogCate.id;
+                delete json.blogCate.id
+            }
             return ({
                 data: resource === 'user' ? {
                     ...json
@@ -85,22 +91,21 @@ export const dataProvider: DataProvider = {
     },
     create: async (resource: any, params: any) => {
         try {
-            let imageUrl = '';
-            if (params.data.image.rawFile instanceof File) {
-                const formData = new FormData();
-                formData.append('image', params.data.image.rawFile);
-
-                const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                const data = await response.json();
-                imageUrl = data.data.url;
-            }
             const url = `${apiUrl}/${resource}/add`;
+            if (resource === 'user' || resource === 'blog') {
+                let imageUrl = '';
+                if (params.data.image && params.data.image.rawFile instanceof File) {
+                    const formData = new FormData();
 
-            if(resource === 'user' && resource === 'blog') {
+                    formData.append('image', params.data.image.rawFile);
+
+                    const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const data = await response.json();
+                    imageUrl = data.data.url;
+                }
                 const {json} = await httpClient(url, {
                     method: 'POST',
                     body: JSON.stringify({...params.data, image: imageUrl}),
@@ -127,13 +132,14 @@ export const dataProvider: DataProvider = {
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            throw new Error('Error fetching data');
+            // @ts-ignore
+            throw new Error(`Error fetching data: ${error.message}`);
         }
     },
     update: async (resource: any, params: any) => {
         if (!params || !params.data) {
             console.error('params.data is undefined');
-            return Promise.resolve({ data: { id: params.id } });
+            return Promise.resolve({data: {id: params.id}});
         }
 
         try {
@@ -150,15 +156,15 @@ export const dataProvider: DataProvider = {
 
             if (!response || !response.json) {
                 console.error('response.json is undefined');
-                return Promise.resolve({ data: { id: params.id } });
+                return Promise.resolve({data: {id: params.id}});
             }
 
             console.log('response', response.json)
             window.location.href = `/#/${resource}`;
-            return Promise.resolve({data: { id: params.id, ...response.json }});
+            return Promise.resolve({data: {id: params.id, ...response.json}});
         } catch (error) {
             console.error('Error updating data:', error);
-            return Promise.resolve({ data: { id: params.id } });
+            return Promise.resolve({data: {id: params.id}});
         }
     },
 

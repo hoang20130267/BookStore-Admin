@@ -18,19 +18,19 @@ export const dataProvider: DataProvider = {
         };
         try {
             let url = `${apiUrl}/${resource}?${fetchUtils.queryParameters(query)}`;
-            if(resource === 'category') {
+            if (resource === 'category') {
                 url = `${apiUrl}/blogCate?${fetchUtils.queryParameters(query)}`;
             }
-            const { json } = await httpClient(url, {
+            const {json} = await httpClient(url, {
                 method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 }),
             });
-                return {
-                    data: json.content,
-                    total: parseInt(json.totalElements, 10),
+            return {
+                data: json.content,
+                total: parseInt(json.totalElements, 10),
             }
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -46,10 +46,15 @@ export const dataProvider: DataProvider = {
             }),
             credentials: 'include',
         }).then(({json}) => {
+            if(resource === 'blog') {
+                json.imageShow = json.image;
+                json.blogCate = json.blogCate.id;
+            }
+            if(resource === 'user') {
+                json.avatarShow = json.avatar;
+            }
             return ({
-                data: resource === 'user' ? {
-                    ...json
-                } : json
+                data: json
             })
         }),
     getMany: async (resource: any, params: any) => {
@@ -85,25 +90,36 @@ export const dataProvider: DataProvider = {
     },
     create: async (resource: any, params: any) => {
         try {
+            const url = `${apiUrl}/${resource}/add`;
             let imageUrl = '';
-            if (params.data.image.rawFile instanceof File) {
+            if (params.data.image && params.data.image.rawFile instanceof File) {
                 const formData = new FormData();
+
                 formData.append('image', params.data.image.rawFile);
 
                 const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
                     method: 'POST',
                     body: formData,
                 });
-
                 const data = await response.json();
                 imageUrl = data.data.url;
             }
-            const url = `${apiUrl}/${resource}/add`;
-
-            if(resource === 'user' && resource === 'blog') {
+            if (resource === 'blog') {
                 const {json} = await httpClient(url, {
                     method: 'POST',
                     body: JSON.stringify({...params.data, image: imageUrl}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                });
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: json});
+            } if(resource === 'user') {
+                const {json} = await httpClient(url, {
+                    method: 'POST',
+                    body: JSON.stringify({...params.data, avatar: imageUrl}),
                     headers: new Headers({
                         'Authorization': `${adminInfo.type} ${adminInfo.token}`,
                         'Content-Type': 'application/json',
@@ -127,38 +143,60 @@ export const dataProvider: DataProvider = {
             }
         } catch (error) {
             console.error('Error fetching data:', error);
-            throw new Error('Error fetching data');
+            // @ts-ignore
+            throw new Error(`Error fetching data: ${error.message}`);
         }
     },
     update: async (resource: any, params: any) => {
-        if (!params || !params.data) {
-            console.error('params.data is undefined');
-            return Promise.resolve({ data: { id: params.id } });
-        }
-
         try {
-            const response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
-                method: 'PUT',
-                body: JSON.stringify(params.data),
-                headers: new Headers({
-                    'Authorization': `${adminInfo.type} ${adminInfo.token}`,
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-                credentials: 'include'
-            })
+            let imageUrl = '';
+            if (params.data.image && params.data.image.rawFile instanceof File) {
+                console.log(params.data.image.rawFile)
+                const formData = new FormData();
 
-            if (!response || !response.json) {
-                console.error('response.json is undefined');
-                return Promise.resolve({ data: { id: params.id } });
+                formData.append('image', params.data.image.rawFile);
+
+                const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
+                    method: 'POST',
+                    body: formData,
+                });
+                const data = await response.json();
+                imageUrl = data.data.url;
             }
-
-            console.log('response', response.json)
-            window.location.href = `/#/${resource}`;
-            return Promise.resolve({data: { id: params.id, ...response.json }});
+            let response;
+            if (resource === 'blog') {
+                response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({...params.data, image: imageUrl}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                    credentials: 'include'
+                })
+            } if(resource === 'user') {
+                response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({...params.data, avatar: imageUrl}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                    credentials: 'include'
+                })
+            }
+            if (response) {
+                const data = await response.json;
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: {id: params.id, ...data}});
+            } else {
+                throw new Error('Response is undefined');
+            }
         } catch (error) {
             console.error('Error updating data:', error);
-            return Promise.resolve({ data: { id: params.id } });
+            return Promise.resolve({data: {id: params.id}});
         }
     },
 

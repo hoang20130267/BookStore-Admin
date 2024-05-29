@@ -5,7 +5,7 @@ import {
     TextInput,
     PasswordInput,
     SelectInput,
-    email,
+    email, ImageField, ImageInput,
 } from 'react-admin';
 import { Box, Typography } from '@mui/material';
 export const validateForm = (
@@ -21,8 +21,8 @@ export const validateForm = (
     if (!values.phone) {
         errors.phone = 'Vui lòng nhập số điện thoại';
     }
-    if (!values.avatar) {
-        errors.avatar = 'Vui lòng nhập đường dẫn ảnh đại diện';
+    if (!values.image) {
+        errors.image = 'Vui lòng nhập đường dẫn ảnh đại diện';
     }
     if (!values.password) {
         errors.password = 'Vui lòng nhập mật khẩu';
@@ -45,18 +45,7 @@ export const AddUser = () => (
     <Create>
         <SimpleForm
             sx={{ maxWidth: 500 }}
-            // Here for the GQL provider
-            defaultValues={{
-                birthday: new Date(),
-                first_seen: new Date(),
-                last_seen: new Date(),
-                has_ordered: false,
-                latest_purchase: new Date(),
-                has_newsletter: false,
-                groups: [],
-                nb_commands: 0,
-                total_spent: 0,
-            }}
+
             validate={validateForm}
         >
             <SectionTitle label="Thông tin cá nhân" />
@@ -73,10 +62,12 @@ export const AddUser = () => (
             <TextInput type="phone" source="phone" isRequired fullWidth />
                 </Box>
                 <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-            <TextInput type="avatar" source="avatar" isRequired fullWidth />
+                    <TextInput type="email" source="email" isRequired fullWidth />
                 </Box>
             </Box>
-            <TextInput type="email" source="email" isRequired fullWidth />
+            <ImageInput source="image" accept="image/*" label="Link hình ảnh" placeholder={<p>Chọn ảnh</p>}>
+                <ImageField source={"src"} title=""/>
+            </ImageInput>
             <Separator />
             <SectionTitle label="Chức năng" />
                 <SelectInput

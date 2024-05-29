@@ -46,11 +46,7 @@ export const EditBlog = () => {
                         />
                     </Box>
                 </Box>
-                <ImageInput source="image" accept="image/*" label="Link hình ảnh" placeholder={<p>Chọn ảnh</p>}
-                            parse={value => {
-                                handleImageChange(value);
-                                return value;
-                            }}>
+                <ImageInput source="image" accept="image/*" label="Link hình ảnh" placeholder={<p>Chọn ảnh</p>} onChange={handleImageChange}>
                     <ImageField source={"src"} title=""/>
                 </ImageInput>
                 {!imageSelected && <ImageField source={"imageShow"} title=""/>}

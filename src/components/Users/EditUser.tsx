@@ -4,9 +4,11 @@ import {
     SimpleForm,
     TextInput,
     SelectInput,
-    email, DateInput,
+    email, DateInput, ImageField, ImageInput,
 } from 'react-admin';
 import { Box, Typography } from '@mui/material';
+import {useState} from "react";
+
 export const validateForm = (values: Record<string, any>): Record<string, any> => {
     const errors = {} as any;
     if (!values.fullName) {
@@ -15,8 +17,8 @@ export const validateForm = (values: Record<string, any>): Record<string, any> =
     if (!values.phone) {
         errors.phoneNumber = 'Vui lòng nhập số điện thoại';
     }
-    if (!values.avatar) {
-        errors.avatar = 'Vui lòng nhập đường dẫn ảnh đại diện';
+    if (!values.image) {
+        errors.image = 'Vui lòng nhập đường dẫn ảnh đại diện';
     }
     if (!values.email) {
         errors.email = 'Vui lòng nhập đúng định dạng email';
@@ -26,12 +28,17 @@ export const validateForm = (values: Record<string, any>): Record<string, any> =
             errors.email = error;
         }
     }
-    if (!values.dateOfBirth) {
-        errors.dateOfBirth = 'Vui lòng nhập đúng ngày sinh';
-    }
     return errors;
 };
 export const EditUser = () => {
+    const [imageSelected, setImageSelected] = useState(false);
+    const handleImageChange = (file:any) => {
+        if (file) {
+            setImageSelected(true);
+        } else {
+            setImageSelected(false);
+        }
+    };
     return (
         <Edit>
             <SimpleForm
@@ -56,25 +63,13 @@ export const EditUser = () => {
                         <TextInput type="phone" source="phone" label="Số điện thoại" isRequired fullWidth />
                     </Box>
                     <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                        <TextInput type="avatar" source="avatar" label="Avatar url" isRequired fullWidth />
+                        <TextInput type="email" source="email" isRequired fullWidth />
                     </Box>
                 </Box>
-                <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-                    <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-                <TextInput type="email" source="email" isRequired fullWidth />
-                    </Box>
-                    <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-                <DateInput type="dateOfBirth" source="dateOfBirth" label="Ngày sinh" fullWidth/>
-                    </Box>
-                </Box>
-                <SelectInput
-                    source="gender"
-                    label="Giới tính"
-                    choices={[
-                        { id: "male", name: 'Nam' },
-                        { id: "female", name: 'Nữ' },
-                    ]}
-                />
+                <ImageInput source="image" accept="image/*" label="Link hình ảnh" placeholder={<p>Chọn ảnh</p>} onChange={handleImageChange}>
+                    <ImageField source={"src"} title=""/>
+                </ImageInput>
+                {!imageSelected && <ImageField source={"avatarShow"} title=""/>}
                 <Separator />
                 <SectionTitle label="Chức năng" />
                 <SelectInput

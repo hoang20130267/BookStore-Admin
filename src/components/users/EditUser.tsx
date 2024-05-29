@@ -4,7 +4,7 @@ import {
     SimpleForm,
     TextInput,
     SelectInput,
-    email, DateInput, ImageField, ImageInput,
+    email, ImageField, ImageInput,
 } from 'react-admin';
 import { Box, Typography } from '@mui/material';
 import {useState} from "react";

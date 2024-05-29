@@ -2,11 +2,11 @@ import {Admin, Resource, houseLightTheme} from "react-admin";
 import {dataProvider} from "./provider/dataProvider";
 import {authProvider} from "./provider/authProvider";
 import Login from "./layout/Login";
-import {BlogList} from "./components/Blogs/BlogList";
-import {CreateBlog} from "./components/Blogs/CreateBlog";
-import {UserList} from "./components/Users/UserList";
-import {AddUser} from "./components/Users/AddUser";
-import {EditUser} from "./components/Users/EditUser";
+import {BlogList} from "./components/blogs/BlogList";
+import {CreateBlog} from "./components/blogs/CreateBlog";
+import {UserList} from "./components/users/UserList";
+import {AddUser} from "./components/users/AddUser";
+import {EditUser} from "./components/users/EditUser";
 import CategoryList from "./components/categories/CategoryList";
 import CategoryIcon from "@mui/icons-material/Category";
 import {CategoryCreate} from "./components/categories/CategoryCreate";
@@ -15,7 +15,9 @@ import {ProductList} from "./components/products/ProductList";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import People from '@mui/icons-material/People';
 import ArticleIcon from '@mui/icons-material/Article';
-import {EditBlog} from "./components/Blogs/EditBlog";
+import {EditBlog} from "./components/blogs/EditBlog";
+import {CommentList} from "./components/comments/CommentList";
+import CommentIcon from '@mui/icons-material/Comment';
 
 function App() {
     return (
@@ -42,7 +44,9 @@ function App() {
                       edit={CategoryEdit}
                       icon={CategoryIcon}/>
             <Resource name="products" options={{label: 'Sản phẩm'}} list={ProductList} icon={InventoryIcon}/>
+            <Resource name="comment" options={{label: 'Đánh giá'}} list={CommentList} icon={CommentIcon}/>
         </Admin>
+
     );
 }
 

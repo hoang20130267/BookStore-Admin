@@ -11,14 +11,28 @@ export interface Category extends RaRecord {
     active: boolean;
 }
 
-export interface Product extends RaRecord{
+export interface Product extends RaRecord {
     id: number;
     category: Category;
     title: string;
     image: string;
-    old_price: number;
-    current_price: number;
-    on_sale: boolean;
+    oldPrice: number;
+    currentPrice: number;
+    onSale: boolean;
+}
 
-    
+export interface Inventory extends RaRecord {
+    id: number;
+    product: Product;
+    importPrice: number;
+    quantity: number;
+    createdAt: string;
+}
+
+
+export interface InventoryRequest {
+    productId:number,
+    importPrice: number,
+    quantity: number,
+    createdAt: string,
 }

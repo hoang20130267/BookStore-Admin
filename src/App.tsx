@@ -20,6 +20,7 @@ import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
 import {InventoryList} from "./components/inventories/InventoryList";
+import {InventoryCreate} from "./components/inventories/InventoryCreate";
 
 function App() {
     return (
@@ -56,6 +57,7 @@ function App() {
             <Resource name="inventories"
                       options={{label: 'Kho'}}
                       list={InventoryList}
+                      create={InventoryCreate}
                       icon={InventoryIcon}/>
         </Admin>
 

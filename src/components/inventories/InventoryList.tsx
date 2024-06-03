@@ -1,27 +1,30 @@
 import {
+    BooleanField, BooleanInput, ChipField,
     CreateButton,
     DatagridConfigurable,
     DateField,
-    ExportButton,
+    ExportButton, FilterButton, FilterListItem,
     List,
     NumberField,
     SearchInput,
-    SelectColumnsButton,
+    SelectColumnsButton, SelectInput,
     TextField, TextInput,
     TopToolbar
 } from "react-admin";
 import * as React from "react";
 
+const postFilters = [
+    <SearchInput source="q" placeholder="Tìm kiếm" alwaysOn/>,
+];
+
 const ListActions = () => (
     <TopToolbar>
+        {/*<FilterButton filters={postFilters} disableSaveQuery/>*/}
         <SelectColumnsButton/>
         <CreateButton/>
         <ExportButton/>
     </TopToolbar>
 );
-const postFilters = [
-    <SearchInput source="q" placeholder="Tìm kiếm" alwaysOn />,
-];
 export const InventoryList = () => (
     <List sort={{field: 'id', order: 'DESC'}}
           perPage={10}
@@ -35,9 +38,10 @@ export const InventoryList = () => (
                 style: 'currency',
                 currency: 'VND',
             }} label="Giá nhập"/>
+            <NumberField source="importedQuantity" label="Số lượng nhập"/>
+            <NumberField source="remainingQuantity" label="Số lượng còn lại"/>
             <DateField source="createdAt" label="Ngày nhập"/>
-            <DateField source="updatedAt" label="Ngày cập nhật"/>
-            <NumberField source="quantity" label="Số lượng"/>
+            <BooleanField source="active" label="Trạng thái"/>
         </DatagridConfigurable>
     </List>
 );

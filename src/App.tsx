@@ -13,11 +13,14 @@ import {CategoryCreate} from "./components/categories/CategoryCreate";
 import {CategoryEdit} from "./components/categories/CategoryEdit";
 import {ProductList} from "./components/products/ProductList";
 import InventoryIcon from '@mui/icons-material/Inventory';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
 import People from '@mui/icons-material/People';
 import ArticleIcon from '@mui/icons-material/Article';
 import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
+import {InventoryList} from "./components/inventories/InventoryList";
+import {InventoryCreate} from "./components/inventories/InventoryCreate";
 
 function App() {
     return (
@@ -43,8 +46,19 @@ function App() {
                       create={CategoryCreate}
                       edit={CategoryEdit}
                       icon={CategoryIcon}/>
-            <Resource name="products" options={{label: 'Sản phẩm'}} list={ProductList} icon={InventoryIcon}/>
-            <Resource name="comment" options={{label: 'Đánh giá'}} list={CommentList} icon={CommentIcon}/>
+            <Resource name="products"
+                      options={{label: 'Sản phẩm'}}
+                      list={ProductList}
+                      icon={LocalMallIcon}/>
+            <Resource name="comment"
+                      options={{label: 'Đánh giá'}}
+                      list={CommentList}
+                      icon={CommentIcon}/>
+            <Resource name="inventories"
+                      options={{label: 'Kho'}}
+                      list={InventoryList}
+                      create={InventoryCreate}
+                      icon={InventoryIcon}/>
         </Admin>
 
     );

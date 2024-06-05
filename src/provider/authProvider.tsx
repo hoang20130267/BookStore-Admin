@@ -41,6 +41,8 @@ export const authProvider: AuthProvider = {
             const { roles } = JSON.parse(authData);
             if (roles && roles.includes('ADMIN')) {
                 return Promise.resolve();
+            } else if(roles && roles.includes('MODERATOR')) {
+                return Promise.resolve();
             }
         }
         return Promise.reject({ message: 'Tài khoản của bạn không có quyền admin' });

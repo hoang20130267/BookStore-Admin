@@ -19,6 +19,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
+import Layout from "./layout/Layout";
 import {InventoryList} from "./components/inventories/InventoryList";
 import {InventoryCreate} from "./components/inventories/InventoryCreate";
 
@@ -30,6 +31,7 @@ function App() {
             authProvider={authProvider}
             loginPage={Login}
             theme={houseLightTheme}
+            layout={Layout}
             disableTelemetry
         >
             <Resource name={'user'} icon={People} list={UserList}

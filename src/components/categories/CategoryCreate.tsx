@@ -5,7 +5,6 @@ import {Category} from "../../type";
 
 export const CategoryCreate = () => {
     const [mainCategories, setMainCategories] = useState<Category[]>([]);
-    console.log(mainCategories);
 
     const {data}: any = useGetList<Category>('categories', {
         filter: {parentCategory: 1, active: true},

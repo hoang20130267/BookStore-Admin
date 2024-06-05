@@ -46,11 +46,11 @@ export const dataProvider: DataProvider = {
             }),
             credentials: 'include',
         }).then(({json}) => {
-            if(resource === 'blogs') {
+            if (resource === 'blog') {
                 json.imageShow = json.image;
                 json.blogCate = json.blogCate.id;
             }
-            if(resource === 'user') {
+            if (resource === 'user') {
                 json.avatarShow = json.avatar;
             }
             return ({
@@ -104,7 +104,7 @@ export const dataProvider: DataProvider = {
                 const data = await response.json();
                 imageUrl = data.data.url;
             }
-            if (resource === 'blogs') {
+            if (resource === 'blog') {
                 const {json} = await httpClient(url, {
                     method: 'POST',
                     body: JSON.stringify({...params.data, image: imageUrl}),
@@ -116,10 +116,24 @@ export const dataProvider: DataProvider = {
                 });
                 window.location.href = `/#/${resource}`;
                 return Promise.resolve({data: json});
-            } if(resource === 'user') {
+            }
+            if (resource === 'user') {
                 const {json} = await httpClient(url, {
                     method: 'POST',
                     body: JSON.stringify({...params.data, avatar: imageUrl}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                });
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: json});
+            }
+            if (resource === 'inventories') {
+                const {json} = await httpClient(url, {
+                    method: 'POST',
+                    body: JSON.stringify(params.data.InventoryRequest),
                     headers: new Headers({
                         'Authorization': `${adminInfo.type} ${adminInfo.token}`,
                         'Content-Type': 'application/json',
@@ -164,7 +178,7 @@ export const dataProvider: DataProvider = {
                 imageUrl = data.data.url;
             }
             let response;
-            if (resource === 'blogs') {
+            if (resource === 'blog') {
                 response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
                     method: 'PUT',
                     body: JSON.stringify({...params.data, image: imageUrl}),
@@ -175,7 +189,8 @@ export const dataProvider: DataProvider = {
                     }),
                     credentials: 'include'
                 })
-            } if(resource === 'user') {
+            }
+            if (resource === 'user') {
                 response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
                     method: 'PUT',
                     body: JSON.stringify({...params.data, avatar: imageUrl}),

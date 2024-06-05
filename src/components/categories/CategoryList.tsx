@@ -1,12 +1,13 @@
 import {
-    BooleanField,
     CreateButton,
-    Datagrid, DatagridConfigurable, DeleteButton, EditButton,
+    DatagridConfigurable,
+    DeleteButton,
+    EditButton,
     ExportButton,
-    FilterButton, FilterLiveSearch,
-    List, SearchInput,
+    List,
+    SearchInput,
     SelectColumnsButton,
-    TextField, TextInput,
+    TextField,
     TopToolbar
 } from "react-admin";
 
@@ -19,7 +20,6 @@ const ListActions = () => (
 );
 const postFilters = [
     <SearchInput source="name" alwaysOn/>,
-    // <TextInput label="Tên danh mục" source="name" />,
 ];
 const CategoryList = () => (
     <List sort={{field: 'id', order: 'DESC'}}

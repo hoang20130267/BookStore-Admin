@@ -46,7 +46,7 @@ export const dataProvider: DataProvider = {
             }),
             credentials: 'include',
         }).then(({json}) => {
-            if(resource === 'blog') {
+            if(resource === 'blogs') {
                 json.imageShow = json.image;
                 json.blogCate = json.blogCate.id;
             }
@@ -104,7 +104,7 @@ export const dataProvider: DataProvider = {
                 const data = await response.json();
                 imageUrl = data.data.url;
             }
-            if (resource === 'blog') {
+            if (resource === 'blogs') {
                 const {json} = await httpClient(url, {
                     method: 'POST',
                     body: JSON.stringify({...params.data, image: imageUrl}),
@@ -164,7 +164,7 @@ export const dataProvider: DataProvider = {
                 imageUrl = data.data.url;
             }
             let response;
-            if (resource === 'blog') {
+            if (resource === 'blogs') {
                 response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
                     method: 'PUT',
                     body: JSON.stringify({...params.data, image: imageUrl}),

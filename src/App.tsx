@@ -22,8 +22,12 @@ import CommentIcon from '@mui/icons-material/Comment';
 import Layout from "./layout/Layout";
 import {InventoryList} from "./components/inventories/InventoryList";
 import {InventoryCreate} from "./components/inventories/InventoryCreate";
+import { useTokenCheck } from "./provider/UserTokenCheck";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+    useTokenCheck(authProvider, 60000);
     return (
         <Admin
             title="Admin"
@@ -52,17 +56,17 @@ function App() {
                       options={{label: 'Sản phẩm'}}
                       list={ProductList}
                       icon={LocalMallIcon}/>
-            <Resource name="comment"
-                      options={{label: 'Đánh giá'}}
-                      list={CommentList}
-                      icon={CommentIcon}/>
             <Resource name="inventories"
                       options={{label: 'Kho'}}
                       list={InventoryList}
                       create={InventoryCreate}
                       icon={InventoryIcon}/>
+            <Resource name="comment"
+                      options={{label: 'Đánh giá'}}
+                      list={CommentList}
+                      icon={CommentIcon}/>
+            <ToastContainer />
         </Admin>
-
     );
 }
 

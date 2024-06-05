@@ -230,5 +230,4 @@ export const dataProvider: DataProvider = {
         })),
     deleteMany: (resource: any, params: any) => Promise.resolve({data: []}),
 }
-
 // export default dataProvider

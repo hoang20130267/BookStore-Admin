@@ -43,9 +43,11 @@ export const authProvider: AuthProvider = {
                 return Promise.resolve();
             } else if(roles && roles.includes('MODERATOR')) {
                 return Promise.resolve();
+            } else if(roles && roles.includes('USER')) {
+                return Promise.reject({ message: 'Tài khoản của bạn không có quyền admin' });
             }
         }
-        return Promise.reject({ message: 'Tài khoản của bạn không có quyền admin' });
+        return Promise.reject({ message: 'Hết phiên đăng nhập' });
     },
     getIdentity: () => {
         const authData = localStorage.getItem('auth');

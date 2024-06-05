@@ -15,6 +15,7 @@ import user from '../components/users';
 import category from '../components/categories';
 import product from '../components/products';
 import comment from '../components/comments';
+import inventory from "../components/inventories";
 import SubMenu from './SubMenu';
 
 type MenuName = 'menuCategories';
@@ -91,6 +92,14 @@ const Menu = ({dense = false}: MenuProps) => {
                     leftIcon={<blog.icon/>}
                     dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
             </SubMenu>
+            <MenuItemLink
+                to="/inventories"
+                state={{_scrollToTop: true}}
+                primaryText={translate(`Kho hàng`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<user.icon/>}
+                dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
             <MenuItemLink
                 to="/comment"
                 state={{_scrollToTop: true}}

@@ -26,6 +26,7 @@ import { useTokenCheck } from "./provider/UserTokenCheck";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ProductCreate} from "./components/products/ProductCreate";
+import {CreateBlogCate} from "./components/blogCates/CreateBlogCate";
 
 function App() {
     useTokenCheck(authProvider, 60000);
@@ -47,6 +48,9 @@ function App() {
                       options={{label: "Bài viết"}}
                       create={CreateBlog}
                       edit={EditBlog}/>
+            <Resource name={'blogCate'} icon={ArticleIcon} list={BlogList}
+                      options={{label: "Bài viết"}}
+                      create={CreateBlogCate}/>
             <Resource name="categories"
                       options={{label: 'Danh mục'}}
                       list={CategoryList}

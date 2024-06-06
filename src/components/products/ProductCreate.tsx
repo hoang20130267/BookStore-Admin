@@ -91,39 +91,30 @@ export const ProductCreate = () => {
                     </Grid>
                 </TabbedForm.Tab>
                 <TabbedForm.Tab label="Chi tiết sản phẩm">
-                    <Grid container columnSpacing={{xs: 1, sm: 2}}>
-                        <Grid item xs={12} sm={6}>
-                            <TextInput source="detail.supplier" label="Nhà cung cấp"/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <TextInput source="detail.supplier" label="Nhà cung cấp" sx={{marginRight: '1em'}}/>
                             <TextInput source="detail.publisher" label="Nhà xuất bản"/>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <DateInput source="detail.publishYear" label="Năm xuất bản"/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
+                            <DateInput source="detail.publishYear" label="Năm xuất bản"
+                                       sx={{marginRight: '5em'}}/>
                             <TextInput source="detail.author" label="Tác giả"/>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextInput source="detail.brand" label="Thương hiệu"/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
+                            <TextInput source="detail.brand" label="Thương hiệu" sx={{marginRight: '1em'}}/>
                             <TextInput source="detail.origin" label="Xuất xứ"/>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextInput source="detail.color" label="Màu sắc"/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
+                            <TextInput source="detail.color" label="Màu sắc" sx={{marginRight: '1em'}}/>
                             <TextInput source="detail.weight" label="Trọng lượng"/>
                         </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextInput source="detail.size" label="Kích cỡ"/>
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
+                            <TextInput source="detail.size" label="Kích cỡ" sx={{marginRight: '1em'}}/>
                             <NumberInput source="detail.quantityOfPage" label="Số trang" validate={[minValue(1)]}/>
                         </Grid>
-                        <Grid item xs={12} sm={12}>
-                            <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth/>
+                        <Grid item xs={12}>
+                            <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth value={req}/>
                         </Grid>
                     </Grid>
                 </TabbedForm.Tab>

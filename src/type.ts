@@ -31,8 +31,9 @@ export interface Inventory extends RaRecord {
 
 
 export interface InventoryRequest {
-    productId:number,
+    productId: number,
     importPrice: number,
+    salePrice: number,
     quantity: number,
     createdAt: string,
 }

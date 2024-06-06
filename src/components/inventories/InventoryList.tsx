@@ -34,10 +34,18 @@ export const InventoryList = () => (
         <DatagridConfigurable>
             <TextField source="id" label="ID"/>
             <TextField source="product.title" label="Tên sản phẩm"/>
-            <NumberField source="importPrice" options={{
-                style: 'currency',
-                currency: 'VND',
-            }} label="Giá nhập"/>
+            <NumberField source="importPrice"
+                         options={{
+                             style: 'currency',
+                             currency: 'VND',
+                         }}
+                         label="Giá nhập"/>
+            <NumberField source="salePrice"
+                         options={{
+                             style: 'currency',
+                             currency: 'VND',
+                         }}
+                         label="Giá bán"/>
             <NumberField source="importedQuantity" label="Số lượng nhập"/>
             <NumberField source="remainingQuantity" label="Số lượng còn lại"/>
             <DateField source="createdAt" label="Ngày nhập"/>

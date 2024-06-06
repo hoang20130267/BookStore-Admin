@@ -1,4 +1,4 @@
-import {Edit, FormDataConsumer, required, SelectInput, SimpleForm, TextInput, useGetList} from "react-admin";
+import {Edit, required, SelectInput, SimpleForm, TextInput, useGetList} from "react-admin";
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {Category} from "../../type";

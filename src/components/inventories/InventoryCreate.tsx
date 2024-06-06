@@ -16,7 +16,7 @@ export const InventoryCreate = () => {
     const [products, setProducts] = useState<Product[]>([]);
     console.log(products)
     const {data}: any = useGetList<Product>('products', {
-        sort: {field: 'id', order: 'ASC'},
+        sort: {field: 'id', order: 'DESC'},
         pagination: {page: 1, perPage: 100}
     });
     useEffect(() => {
@@ -31,7 +31,7 @@ export const InventoryCreate = () => {
                 <ArrayInput source="InventoryRequest" label="Nhập sản phẩm">
                     <SimpleFormIterator sx={{marginTop: '20px'}} inline>
                         <SelectInput
-                            sx={{maxWidth: '25em'}}
+                            sx={{maxWidth: '20em'}}
                             source="productId"
                             label="Sản phẩm"
                             choices={products}
@@ -39,13 +39,17 @@ export const InventoryCreate = () => {
                             optionValue="id"
                             validate={[required()]}
                         />
-                        <NumberInput sx={{maxWidth: '10em'}} step='1000' source="importPrice" helperText={false}
+                        <NumberInput sx={{maxWidth: '9em'}} step='1000' source="importPrice" helperText={false}
                                      label="Giá nhập"
                                      validate={[required(), minValue(1000)]}/>
-                        <NumberInput sx={{maxWidth: '10em'}} source="quantity" helperText={false} label="Số lượng"
+                        <NumberInput sx={{maxWidth: '9em'}} step='1000' source="salePrice" helperText={false}
+                                     label="Giá bán"
+                                     validate={[required(), minValue(1000)]}/>
+                        <NumberInput sx={{maxWidth: '9em'}} source="quantity" helperText={false} label="Số lượng"
                                      validate={[required(), minValue(1)]}/>
                     </SimpleFormIterator>
                 </ArrayInput>
             </SimpleForm>
-        </Create>)
-}
+        </Create>
+    );
+};

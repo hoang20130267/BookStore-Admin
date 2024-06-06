@@ -1,4 +1,5 @@
 import {
+    BooleanField,
     ChipField,
     CreateButton,
     DatagridConfigurable, DateInput,
@@ -45,6 +46,7 @@ export const ProductList = () => (
                          label="Giá hiện tại"/>
             <TextField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedAt" label="Ngày cập nhật"/>
+            <BooleanField source="active" label="Trạng thái"/>
         </DatagridConfigurable>
     </List>
 );

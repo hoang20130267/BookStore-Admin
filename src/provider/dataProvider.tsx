@@ -140,6 +140,35 @@ export const dataProvider: DataProvider = {
                 window.location.href = `/#/${resource}`;
                 return Promise.resolve({data: json});
             }
+            if (resource === 'products') {
+                let subImageUrls = [];
+                if (params.data.images && params.data.images.length > 0) {
+                    for (const file of params.data.images) {
+                        if (file.rawFile instanceof File) {
+                            const formData = new FormData();
+                            formData.append('image', file.rawFile);
+
+                            const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
+                                method: 'POST',
+                                body: formData,
+                            });
+                            const data = await response.json();
+                            subImageUrls.push({image: data.data.url});
+                        }
+                    }
+                }
+                const {json} = await httpClient(url, {
+                    method: 'POST',
+                    body: JSON.stringify({...params.data, image: imageUrl, images: subImageUrls}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                });
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: json});
+            }
             if (resource === 'inventories') {
                 const {json} = await httpClient(url, {
                     method: 'POST',

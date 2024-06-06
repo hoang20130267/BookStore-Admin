@@ -25,6 +25,7 @@ import {InventoryCreate} from "./components/inventories/InventoryCreate";
 import { useTokenCheck } from "./provider/UserTokenCheck";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {ProductCreate} from "./components/products/ProductCreate";
 import {CreateBlogCate} from "./components/blogCates/CreateBlogCate";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
             <Resource name="products"
                       options={{label: 'Sản phẩm'}}
                       list={ProductList}
+                      create={ProductCreate}
                       icon={LocalMallIcon}/>
             <Resource name="inventories"
                       options={{label: 'Kho'}}

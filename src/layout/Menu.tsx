@@ -98,7 +98,7 @@ const Menu = ({dense = false}: MenuProps) => {
                 primaryText={translate(`Kho hàng`, {
                     smart_count: 2,
                 })}
-                leftIcon={<user.icon/>}
+                leftIcon={<inventory.icon/>}
                 dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
             <MenuItemLink
                 to="/comment"

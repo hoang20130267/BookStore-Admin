@@ -1,7 +1,9 @@
-import InventoryIcon from "@mui/icons-material/Inventory";
 import {ProductList} from "./ProductList";
+import {ProductCreate} from "./ProductCreate";
+import LocalMallIcon from "@mui/icons-material/LocalMall";
 
 export default {
     list: ProductList,
-    icon: InventoryIcon,
+    create: ProductCreate,
+    icon: LocalMallIcon,
 };

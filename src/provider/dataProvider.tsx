@@ -18,9 +18,6 @@ export const dataProvider: DataProvider = {
         };
         try {
             let url = `${apiUrl}/${resource}?${fetchUtils.queryParameters(query)}`;
-            if (resource === 'category') {
-                url = `${apiUrl}/blogCate?${fetchUtils.queryParameters(query)}`;
-            }
             const {json} = await httpClient(url, {
                 method: 'GET',
                 headers: new Headers({
@@ -117,6 +114,19 @@ export const dataProvider: DataProvider = {
                 window.location.href = `/#/${resource}`;
                 return Promise.resolve({data: json});
             }
+            if (resource === 'blogCate') {
+                const {json} = await httpClient(url, {
+                    method: 'POST',
+                    body: JSON.stringify({...params.data, createBy: adminInfo.id, updateBy: adminInfo.id}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                });
+                window.location.href = `/#/${resource}`;
+                return Promise.resolve({data: json});
+            }
             if (resource === 'user') {
                 const {json} = await httpClient(url, {
                     method: 'POST',
@@ -182,6 +192,18 @@ export const dataProvider: DataProvider = {
                 response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
                     method: 'PUT',
                     body: JSON.stringify({...params.data, image: imageUrl}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                    credentials: 'include'
+                })
+            }
+            if (resource === 'blogCate') {
+                response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({...params.data, updateBy: adminInfo.id}),
                     headers: new Headers({
                         'Authorization': `${adminInfo.type} ${adminInfo.token}`,
                         'Content-Type': 'application/json',

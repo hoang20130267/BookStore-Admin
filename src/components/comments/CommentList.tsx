@@ -16,7 +16,6 @@ import RatingField from './RatingField';
 
 const VisitorListActions = () => (
     <TopToolbar>
-        <CreateButton/>
         <SelectColumnsButton/>
         <ExportButton/>
     </TopToolbar>

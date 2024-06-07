@@ -23,7 +23,7 @@ const VisitorListActions = () => (
     </TopToolbar>
 );
 export const BlogList = () => (
-    <List sort={{field: 'title', order: 'DESC'}} perPage={5}
+    <List sort={{field: 'id', order: 'ASC'}} perPage={5}
           actions={<VisitorListActions/>}
           filters={<BlogSearch/>}
           sx={{

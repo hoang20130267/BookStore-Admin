@@ -22,7 +22,7 @@ const postFilters = [
     <SearchInput source="name" alwaysOn/>,
 ];
 const CategoryList = () => (
-    <List sort={{field: 'id', order: 'DESC'}}
+    <List sort={{field: 'id', order: 'ASC'}}
           filters={postFilters}
           actions={<ListActions/>}
     >

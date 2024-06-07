@@ -6,8 +6,8 @@ import {
 } from 'react-admin';
 import {Box, Typography} from '@mui/material';
 import {useEffect} from "react";
-import { RichTextInput } from 'ra-input-rich-text';
-import { useParams } from 'react-router-dom';
+import {RichTextInput} from 'ra-input-rich-text';
+import {useParams} from 'react-router-dom';
 
 export const validateForm = (values: Record<string, any>): Record<string, any> => {
     const errors = {} as any;
@@ -17,25 +17,23 @@ export const validateForm = (values: Record<string, any>): Record<string, any> =
     return errors;
 };
 export const ReplyContact = () => {
-    const { id } = useParams<{ id: string }>();
-    useEffect(() => {
-        const response = new Request(`http://localhost:8080/api/contact/check-reply/${id}`, {
-            method: 'GET',
-            headers: new Headers({'Content-Type': 'application/json'}),
+    const {id} = useParams<{ id: string }>();
+    const response = new Request(`http://localhost:8080/api/contact/check-reply/${id}`, {
+        method: 'GET',
+        headers: new Headers({'Content-Type': 'application/json'}),
+    });
+    fetch(response)
+        .then(async response => {
+            const responseBody = await response.text();
+            if (response.status === 200 && responseBody === "Replied") {
+                window.location.href = `/#/contact`;
+                return Promise.reject({message: 'Bạn đã trả lời email này rồi'});
+            }
+            return {status: response.status};
+        })
+        .catch((error) => {
+            console.error(error.message);
         });
-        fetch(response)
-            .then(async response => {
-                const responseBody = await response.text();
-                if (response.status === 200 && responseBody === "Replied") {
-                    window.location.href = `/#/contact`;
-                    return Promise.reject({message: 'Bạn đã trả lời email này rồi'});
-                }
-                return {status: response.status};
-            })
-            .catch((error) => {
-                console.error(error.message);
-            });
-    }, []);
     return (
         <Edit>
             <SimpleForm

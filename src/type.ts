@@ -18,7 +18,13 @@ export interface Product extends RaRecord {
     image: string;
     oldPrice: number;
     currentPrice: number;
-    onSale: boolean;
+    active: boolean;
+    createdBy: string;
+    createdAt: string;
+    updatedBy: string;
+    updatedAt: string;
+    images: ProductImage[];
+    detail: ProductDetail;
 }
 
 export interface Inventory extends RaRecord {
@@ -36,4 +42,26 @@ export interface InventoryRequest {
     salePrice: number,
     quantity: number,
     createdAt: string,
+}
+export interface ProductImage extends RaRecord {
+    id: number;
+    product: Product;
+    image: string;
+    createdAt: string;
+    updatedAt: string;
+    deleted: boolean;
+}
+export interface ProductDetail extends RaRecord {
+    id: number;
+    product: Product;
+    productSku: string;
+    supplier: string;
+    publishYear: string;
+    author: string;
+    origin: string;
+    color: string;
+    weight: string;
+    size: string;
+    quantityOfPage: number;
+    description: string;
 }

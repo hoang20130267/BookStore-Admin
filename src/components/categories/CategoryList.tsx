@@ -26,7 +26,7 @@ const CategoryList = () => (
           filters={postFilters}
           actions={<ListActions/>}
     >
-        <DatagridConfigurable rowClick="show">
+        <DatagridConfigurable rowClick="edit">
             <TextField source="id" label="ID"/>
             <TextField source="parentCategory.name" label="Danh mục cha"/>
             <TextField source="name" label="Tên danh mục"/>

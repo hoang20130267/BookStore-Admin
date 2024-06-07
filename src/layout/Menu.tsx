@@ -16,6 +16,7 @@ import category from '../components/categories';
 import product from '../components/products';
 import comment from '../components/comments';
 import inventory from "../components/inventories";
+import contact from "../components/contact";
 import SubMenu from './SubMenu';
 
 type MenuName = 'menuCategories';
@@ -107,6 +108,14 @@ const Menu = ({dense = false}: MenuProps) => {
                     smart_count: 2,
                 })}
                 leftIcon={<comment.icon/>}
+                dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
+            <MenuItemLink
+                to="/contact"
+                state={{_scrollToTop: true}}
+                primaryText={translate(`Liên hệ`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<contact.icon/>}
                 dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
         </Box>
     );

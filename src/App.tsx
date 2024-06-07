@@ -16,6 +16,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import People from '@mui/icons-material/People';
 import ArticleIcon from '@mui/icons-material/Article';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
@@ -27,6 +28,10 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ProductCreate} from "./components/products/ProductCreate";
 import {CreateBlogCate} from "./components/blogCates/CreateBlogCate";
+import {BlogCateList} from "./components/blogCates/BlogCateList";
+import {EditBlogCate} from "./components/blogCates/EditBlogCate";
+import { ContactList } from "./components/contact/ContactList";
+import { ReplyContact } from "./components/contact/ReplyContact";
 
 function App() {
     useTokenCheck(authProvider, 60000);
@@ -48,9 +53,10 @@ function App() {
                       options={{label: "Bài viết"}}
                       create={CreateBlog}
                       edit={EditBlog}/>
-            <Resource name={'blogCate'} icon={ArticleIcon} list={BlogList}
+            <Resource name={'blogCate'} icon={ArticleIcon} list={BlogCateList}
                       options={{label: "Bài viết"}}
-                      create={CreateBlogCate}/>
+                      create={CreateBlogCate}
+                      edit={EditBlogCate}/>
             <Resource name="categories"
                       options={{label: 'Danh mục'}}
                       list={CategoryList}
@@ -71,6 +77,11 @@ function App() {
                       options={{label: 'Đánh giá'}}
                       list={CommentList}
                       icon={CommentIcon}/>
+            <Resource name="contact"
+                      options={{label: 'Liên hệ'}}
+                      list={ContactList}
+                      edit={ReplyContact}
+                      icon={ContactMailIcon}/>
             <ToastContainer />
         </Admin>
     );

@@ -1,30 +1,28 @@
 import * as React from 'react';
-import {BlogCateSearch} from "./BlogCateSearch";
+import {ContactSearch} from "./ContactSearch";
+import { EditButton, DeleteButton } from 'react-admin';
 import {
-    CreateButton,
     ExportButton,
     TopToolbar,
-    SelectColumnsButton, DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
+    SelectColumnsButton,DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
 } from 'react-admin';
 import {
     List,
     TextField,
     DateField,
-    EditButton,
-    DeleteButton,
+    BooleanField
 } from "react-admin";
 
 const VisitorListActions = () => (
     <TopToolbar>
-        <CreateButton/>
         <SelectColumnsButton/>
         <ExportButton/>
     </TopToolbar>
 );
-export const BlogCateList = () => (
+export const ContactList = () => (
     <List sort={{field: 'id', order: 'ASC'}} perPage={5}
           actions={<VisitorListActions/>}
-          filters={<BlogCateSearch/>}
+          filters={<ContactSearch/>}
           sx={{
               '& .column-title': {
                   maxWidth: '16em',
@@ -47,12 +45,16 @@ export const BlogCateList = () => (
             }
         >
             <TextField source="id" label="ID"/>
-            <TextField source="name" label="Tên danh mục"/>
-            <TextField source="createdBy.userInfo.fullName" label="Người tạo"/>
-            <DateField source="createdAt" label="Ngày tạo"/>
-            <TextField source="updatedBy.userInfo.fullName" label="Người cập nhật"/>
-            <DateField source="updatedAt" label="Ngày cập nhật"/>
-            <EditButton />
+            <TextField source="fullName" label="Họ và tên "/>
+            <TextField source="email" label="Email"/>
+            <TextField source="title" label="Tiêu đề"/>
+            <BooleanField
+                source="reply"
+                label="Đã trả lời"
+                sx={{ mt: -0.5, mb: -0.5 }}
+            />
+            <DateField source="createdDate" label="Ngày tạo" showDate showTime={false}/>
+            <EditButton/>
             <DeleteButton />
         </DatagridConfigurable>
     </List>

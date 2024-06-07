@@ -32,6 +32,10 @@ import {BlogCateList} from "./components/blogCates/BlogCateList";
 import {EditBlogCate} from "./components/blogCates/EditBlogCate";
 import { ContactList } from "./components/contact/ContactList";
 import { ReplyContact } from "./components/contact/ReplyContact";
+import DiscountIcon from '@mui/icons-material/Discount';
+import {PromotionList} from "./components/promotion/PromotionList";
+import PromotionCreate from "./components/promotion/PromotionCreate";
+import PromotionEdit from "./components/promotion/PromotionEdit";
 
 function App() {
     useTokenCheck(authProvider, 60000);
@@ -68,6 +72,12 @@ function App() {
                       list={ProductList}
                       create={ProductCreate}
                       icon={LocalMallIcon}/>
+            <Resource name="promotion"
+                      options={{label: 'Giảm giá'}}
+                      list={PromotionList}
+                      create={PromotionCreate}
+                      edit={PromotionEdit}
+                      icon={DiscountIcon}/>
             <Resource name="inventories"
                       options={{label: 'Kho'}}
                       list={InventoryList}

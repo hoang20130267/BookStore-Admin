@@ -50,6 +50,9 @@ export const dataProvider: DataProvider = {
             if (resource === 'user') {
                 json.avatarShow = json.avatar;
             }
+            if (resource === 'promotion' && json.product !== null) {
+                json.idProduct = json.product.id;
+            }
             return ({
                 data: json
             })
@@ -181,6 +184,19 @@ export const dataProvider: DataProvider = {
                 });
                 window.location.href = `/#/${resource}`;
                 return Promise.resolve({data: json});
+            }
+            if (resource === 'promotion') {
+                    const {json} = await httpClient(url, {
+                        method: 'POST',
+                        body: JSON.stringify(params.data),
+                        headers: new Headers({
+                            'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                            'Content-Type': 'application/json',
+                            Accept: 'application/json',
+                        }),
+                    });
+                    window.location.href = `/#/${resource}`;
+                    return Promise.resolve({data: json});
             } else {
                 const {json} = await httpClient(url, {
                     method: 'POST',
@@ -253,7 +269,7 @@ export const dataProvider: DataProvider = {
                     credentials: 'include'
                 })
             }
-            if (resource === 'contact') {
+            if (resource === 'contact' || resource === 'promotion') {
                 response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
                     method: 'PUT',
                     body: JSON.stringify({...params.data}),

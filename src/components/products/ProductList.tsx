@@ -23,7 +23,7 @@ const postFilters = [
     <SearchInput source="title" alwaysOn/>,
 ];
 export const ProductList = () => (
-    <List sort={{field: 'id', order: 'DESC'}}
+    <List sort={{field: 'id', order: 'ASC'}}
           perPage={10}
           filters={postFilters}
           actions={<ListActions/>}

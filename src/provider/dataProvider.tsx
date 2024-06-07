@@ -117,7 +117,7 @@ export const dataProvider: DataProvider = {
             if (resource === 'blogCate') {
                 const {json} = await httpClient(url, {
                     method: 'POST',
-                    body: JSON.stringify({...params.data, createBy: adminInfo.id, updateBy: adminInfo.id}),
+                    body: JSON.stringify({...params.data, createdBy: adminInfo.id, updatedBy: adminInfo.id}),
                     headers: new Headers({
                         'Authorization': `${adminInfo.type} ${adminInfo.token}`,
                         'Content-Type': 'application/json',
@@ -253,6 +253,18 @@ export const dataProvider: DataProvider = {
                     credentials: 'include'
                 })
             }
+            if (resource === 'contact') {
+                response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({...params.data}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                    credentials: 'include'
+                })
+            }
             if (response) {
                 const data = await response.json;
                 window.location.href = `/#/${resource}`;
@@ -268,17 +280,25 @@ export const dataProvider: DataProvider = {
 
     updateMany: (resource: any, params: any) => Promise.resolve({data: []}),
 
-    delete: (resource: any, params: any) =>
-        httpClient(`${apiUrl}/${resource}/delete/${params.id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            }),
-            credentials: 'include'
-        }).then(({json}) => ({
-            data: json,
-        })),
+    delete: async (resource: any, params: any) => {
+        try {
+            const response = await httpClient(`${apiUrl}/${resource}/delete/${params.id}`, {
+                method: 'DELETE',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                }),
+                credentials: 'include'
+            });
+            const { json } = response;
+            return {
+                data: json,
+            };
+        } catch (error) {
+            console.error('Error deleting data:', error);
+            throw new Error('Error deleting data');
+        }
+    },
     deleteMany: (resource: any, params: any) => Promise.resolve({data: []}),
 }
 // export default dataProvider

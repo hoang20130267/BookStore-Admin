@@ -1,14 +1,14 @@
 import {
-    BooleanField, BooleanInput, ChipField,
+    BooleanField,
     CreateButton,
     DatagridConfigurable,
     DateField,
-    ExportButton, FilterButton, FilterListItem,
+    ExportButton,
     List,
     NumberField,
     SearchInput,
-    SelectColumnsButton, SelectInput,
-    TextField, TextInput,
+    SelectColumnsButton,
+    TextField,
     TopToolbar
 } from "react-admin";
 import * as React from "react";

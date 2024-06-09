@@ -17,23 +17,24 @@ export const CategoryEdit = () => {
             setMainCategories(data);
         }
     }, [data]);
-    return (<Edit title="Chỉnh sửa danh mục">
-        <SimpleForm>
-            <TextInput source="id" label="ID" disabled/>
-            <TextInput source="name" label="Tên danh mục" validate={[required()]}/>
-            <SelectInput
-                source="parentCategory.id"
-                label="Danh mục cha"
-                choices={mainCategories}
-            />
-            <SelectInput
-                source="active"
-                label="Trạng thái"
-                choices={[
-                    {id: true, name: 'Active'},
-                    {id: false, name: 'Inactive'},
-                ]}
-            />
-        </SimpleForm>
-    </Edit>)
+    return (
+        <Edit title="Chỉnh sửa danh mục">
+            <SimpleForm>
+                <TextInput source="id" label="ID" disabled/>
+                <TextInput source="name" label="Tên danh mục" validate={[required()]}/>
+                <SelectInput
+                    source="parentCategory.id"
+                    label="Danh mục cha"
+                    choices={mainCategories}
+                />
+                <SelectInput
+                    source="active"
+                    label="Trạng thái"
+                    choices={[
+                        {id: true, name: 'Active'},
+                        {id: false, name: 'Inactive'},
+                    ]}
+                />
+            </SimpleForm>
+        </Edit>)
 };

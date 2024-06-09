@@ -20,14 +20,18 @@ import ContactMailIcon from '@mui/icons-material/ContactMail';
 import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import Layout from "./layout/Layout";
 import {InventoryList} from "./components/inventories/InventoryList";
 import {InventoryCreate} from "./components/inventories/InventoryCreate";
-import { useTokenCheck } from "./provider/UserTokenCheck";
-import { ToastContainer } from 'react-toastify';
+import {useTokenCheck} from "./provider/UserTokenCheck";
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ProductCreate} from "./components/products/ProductCreate";
 import {CreateBlogCate} from "./components/blogCates/CreateBlogCate";
+import {ProductShow} from "./components/products/ProductShow";
+import {ProductEdit} from "./components/products/ProductEdit";
+import {OrderList} from "./components/orders/OrderList";
 import {BlogCateList} from "./components/blogCates/BlogCateList";
 import {EditBlogCate} from "./components/blogCates/EditBlogCate";
 import { ContactList } from "./components/contact/ContactList";
@@ -73,7 +77,13 @@ function App() {
                       options={{label: 'Sản phẩm'}}
                       list={ProductList}
                       create={ProductCreate}
+                      show={ProductShow}
+                      edit={ProductEdit}
                       icon={LocalMallIcon}/>
+            <Resource name="orders"
+                      options={{label: 'Đơn hàng'}}
+                      list={OrderList}
+                      icon={AttachMoneyIcon}/>
             <Resource name="promotion"
                       options={{label: 'Giảm giá'}}
                       list={PromotionList}
@@ -89,6 +99,7 @@ function App() {
                       options={{label: 'Đánh giá'}}
                       list={CommentList}
                       icon={CommentIcon}/>
+            <ToastContainer/>
             <Resource name="contact"
                       options={{label: 'Liên hệ'}}
                       list={ContactList}

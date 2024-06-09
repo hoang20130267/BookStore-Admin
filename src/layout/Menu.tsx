@@ -70,6 +70,8 @@ const Menu = ({dense = false}: MenuProps) => {
                     smart_count: 2,
                 })}
                 leftIcon={<order.icon/>}
+                dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
+            <MenuItemLink
                 to="/promotion"
                 state={{_scrollToTop: true}}
                 primaryText={translate(`Giảm giá`, {

@@ -22,7 +22,7 @@ const VisitorListActions = () => (
     </TopToolbar>
 );
 export const BlogCateList = () => (
-    <List sort={{field: 'id', order: 'DESC'}} perPage={5}
+    <List sort={{field: 'id', order: 'ASC'}} perPage={5}
           actions={<VisitorListActions/>}
           filters={<BlogCateSearch/>}
           sx={{
@@ -47,10 +47,10 @@ export const BlogCateList = () => (
             }
         >
             <TextField source="id" label="ID"/>
+            <TextField source="name" label="Tên danh mục"/>
             <TextField source="createdBy.userInfo.fullName" label="Người tạo"/>
-            <TextField source="createdBy.username" label="Người tạo"/>
             <DateField source="createdAt" label="Ngày tạo"/>
-            <TextField source="updateBy.userInfo.fullName" label="Người cập nhật"/>
+            <TextField source="updatedBy.userInfo.fullName" label="Người cập nhật"/>
             <DateField source="updatedAt" label="Ngày cập nhật"/>
             <EditButton />
             <DeleteButton />

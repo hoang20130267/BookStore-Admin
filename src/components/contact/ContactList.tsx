@@ -1,18 +1,17 @@
 import * as React from 'react';
-import {CommentSearch} from "./CommentSearch";
+import {ContactSearch} from "./ContactSearch";
+import { EditButton, DeleteButton } from 'react-admin';
 import {
-    CreateButton,
     ExportButton,
     TopToolbar,
-    SelectColumnsButton, DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
+    SelectColumnsButton,DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
 } from 'react-admin';
 import {
     List,
     TextField,
     DateField,
-    DeleteButton,
+    BooleanField
 } from "react-admin";
-import RatingField from './RatingField';
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -20,10 +19,10 @@ const VisitorListActions = () => (
         <ExportButton/>
     </TopToolbar>
 );
-export const CommentList = () => (
-    <List sort={{field: 'id', order: 'DESC'}} perPage={5}
+export const ContactList = () => (
+    <List sort={{field: 'id', order: 'ASC'}} perPage={5}
           actions={<VisitorListActions/>}
-          filters={<CommentSearch/>}
+          filters={<ContactSearch/>}
           sx={{
               '& .column-title': {
                   maxWidth: '16em',
@@ -46,11 +45,16 @@ export const CommentList = () => (
             }
         >
             <TextField source="id" label="ID"/>
-            <TextField source="user.username" label="Người bình luận"/>
-            <TextField source="cmtDetail" label="Người tạo"/>
-            <RatingField source="rating" label="Số sao"/>
-            <DateField source="created_at" label="Ngày tạo"/>
-            <DateField source="updated_at" label="Ngày tạo"/>
+            <TextField source="fullName" label="Họ và tên "/>
+            <TextField source="email" label="Email"/>
+            <TextField source="title" label="Tiêu đề"/>
+            <BooleanField
+                source="reply"
+                label="Đã trả lời"
+                sx={{ mt: -0.5, mb: -0.5 }}
+            />
+            <DateField source="createdDate" label="Ngày tạo" showDate showTime={false}/>
+            <EditButton/>
             <DeleteButton />
         </DatagridConfigurable>
     </List>

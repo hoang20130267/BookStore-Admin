@@ -16,6 +16,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import People from '@mui/icons-material/People';
 import ArticleIcon from '@mui/icons-material/Article';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
@@ -31,6 +32,14 @@ import {CreateBlogCate} from "./components/blogCates/CreateBlogCate";
 import {ProductShow} from "./components/products/ProductShow";
 import {ProductEdit} from "./components/products/ProductEdit";
 import {OrderList} from "./components/orders/OrderList";
+import {BlogCateList} from "./components/blogCates/BlogCateList";
+import {EditBlogCate} from "./components/blogCates/EditBlogCate";
+import { ContactList } from "./components/contact/ContactList";
+import { ReplyContact } from "./components/contact/ReplyContact";
+import DiscountIcon from '@mui/icons-material/Discount';
+import {PromotionList} from "./components/promotion/PromotionList";
+import PromotionCreate from "./components/promotion/PromotionCreate";
+import PromotionEdit from "./components/promotion/PromotionEdit";
 
 function App() {
     useTokenCheck(authProvider, 60000);
@@ -52,9 +61,10 @@ function App() {
                       options={{label: "Bài viết"}}
                       create={CreateBlog}
                       edit={EditBlog}/>
-            <Resource name={'blogCate'} icon={ArticleIcon} list={BlogList}
+            <Resource name={'blogCate'} icon={ArticleIcon} list={BlogCateList}
                       options={{label: "Bài viết"}}
-                      create={CreateBlogCate}/>
+                      create={CreateBlogCate}
+                      edit={EditBlogCate}/>
             <Resource name="categories"
                       options={{label: 'Danh mục'}}
                       list={CategoryList}
@@ -72,6 +82,12 @@ function App() {
                       options={{label: 'Đơn hàng'}}
                       list={OrderList}
                       icon={AttachMoneyIcon}/>
+            <Resource name="promotion"
+                      options={{label: 'Giảm giá'}}
+                      list={PromotionList}
+                      create={PromotionCreate}
+                      edit={PromotionEdit}
+                      icon={DiscountIcon}/>
             <Resource name="inventories"
                       options={{label: 'Kho'}}
                       list={InventoryList}
@@ -82,6 +98,12 @@ function App() {
                       list={CommentList}
                       icon={CommentIcon}/>
             <ToastContainer/>
+            <Resource name="contact"
+                      options={{label: 'Liên hệ'}}
+                      list={ContactList}
+                      edit={ReplyContact}
+                      icon={ContactMailIcon}/>
+            <ToastContainer />
         </Admin>
     );
 }

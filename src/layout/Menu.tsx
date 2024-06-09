@@ -17,6 +17,8 @@ import product from '../components/products';
 import comment from '../components/comments';
 import inventory from "../components/inventories";
 import order from "../components/orders";
+import contact from "../components/contact";
+import promotion from "../components/promotion";
 import SubMenu from './SubMenu';
 
 type MenuName = 'menuCategories';
@@ -68,6 +70,12 @@ const Menu = ({dense = false}: MenuProps) => {
                     smart_count: 2,
                 })}
                 leftIcon={<order.icon/>}
+                to="/promotion"
+                state={{_scrollToTop: true}}
+                primaryText={translate(`Giảm giá`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<promotion.icon/>}
                 dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
             <MenuItemLink
                 to="/blog"
@@ -116,6 +124,14 @@ const Menu = ({dense = false}: MenuProps) => {
                     smart_count: 2,
                 })}
                 leftIcon={<comment.icon/>}
+                dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
+            <MenuItemLink
+                to="/contact"
+                state={{_scrollToTop: true}}
+                primaryText={translate(`Liên hệ`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<contact.icon/>}
                 dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
         </Box>
     );

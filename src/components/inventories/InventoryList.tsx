@@ -26,7 +26,7 @@ const ListActions = () => (
     </TopToolbar>
 );
 export const InventoryList = () => (
-    <List sort={{field: 'id', order: 'DESC'}}
+    <List sort={{field: 'id', order: 'ASC'}}
           perPage={10}
           filters={postFilters}
           actions={<ListActions/>}

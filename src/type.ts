@@ -122,6 +122,7 @@ export interface Order extends RaRecord {
     shippingCost: number;
     note: string;
     orderDetails: OrderDetail;
+    promotion: Promotion;
 }
 
 export interface OrderDetail extends RaRecord {
@@ -130,4 +131,13 @@ export interface OrderDetail extends RaRecord {
     product: Product;
     quantity: number;
     totalMoney: number;
+}
+export interface Promotion extends RaRecord {
+    id: number;
+    product: Product;
+    code: string;
+    discount: number;
+    startDate: string;
+    endDate: string;
+    isCode: boolean;
 }

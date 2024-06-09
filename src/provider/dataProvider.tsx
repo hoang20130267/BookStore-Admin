@@ -269,7 +269,7 @@ export const dataProvider: DataProvider = {
                     credentials: 'include'
                 })
             }
-            if (resource === 'contact' || resource === 'promotion') {
+            if (resource === 'contact' || resource === 'promotion'||resource === 'orders') {
                 response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
                     method: 'PUT',
                     body: JSON.stringify({...params.data}),

@@ -65,17 +65,18 @@ export const ProductCreate = () => {
                                 source="parentCategory.id"
                                 label="Danh mục cha"
                                 choices={mainCategories}
+                                validate={req}
                                 onChange={(e) => setSelectedMainCategory(e.target.value)}
                             />
                             <SelectInput
                                 source="category.id"
                                 label="Danh mục"
                                 choices={subCategories}
-                                value={req}
+                                validate={req}
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextInput source="title" label="Tên sản phẩm" value={req}/>
+                            <TextInput source="title" label="Tên sản phẩm" validate={req}/>
                         </Grid>
                         <Grid item xs={12}>
                             <ImageInput source="image" label="Ảnh chính" accept="image/*" validate={validateMainImage}>

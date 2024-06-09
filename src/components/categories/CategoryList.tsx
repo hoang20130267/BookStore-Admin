@@ -19,14 +19,14 @@ const ListActions = () => (
     </TopToolbar>
 );
 const postFilters = [
-    <SearchInput source="name" alwaysOn/>,
+    <SearchInput source="name" placeholder="Tìm kiếm" alwaysOn/>,
 ];
 const CategoryList = () => (
     <List sort={{field: 'id', order: 'ASC'}}
           filters={postFilters}
           actions={<ListActions/>}
     >
-        <DatagridConfigurable rowClick="show">
+        <DatagridConfigurable rowClick="edit">
             <TextField source="id" label="ID"/>
             <TextField source="parentCategory.name" label="Danh mục cha"/>
             <TextField source="name" label="Tên danh mục"/>

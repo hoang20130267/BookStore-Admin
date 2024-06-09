@@ -2,7 +2,7 @@ import {
     BooleanField,
     ChipField,
     CreateButton,
-    DatagridConfigurable, DateInput,
+    DatagridConfigurable, DateInput, DeleteButton, EditButton,
     ExportButton, ImageField,
     List, NumberField,
     SearchInput,
@@ -20,7 +20,7 @@ const ListActions = () => (
 );
 
 const postFilters = [
-    <SearchInput source="title" alwaysOn/>,
+    <SearchInput source="title" placeholder="Tìm kiếm" alwaysOn/>,
 ];
 export const ProductList = () => (
     <List sort={{field: 'id', order: 'ASC'}}
@@ -47,6 +47,8 @@ export const ProductList = () => (
             <TextField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedAt" label="Ngày cập nhật"/>
             <BooleanField source="active" label="Trạng thái"/>
+            {/*<EditButton/>*/}
+            {/*<DeleteButton/>*/}
         </DatagridConfigurable>
     </List>
 );

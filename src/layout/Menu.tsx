@@ -16,6 +16,7 @@ import category from '../components/categories';
 import product from '../components/products';
 import comment from '../components/comments';
 import inventory from "../components/inventories";
+import order from "../components/orders";
 import contact from "../components/contact";
 import promotion from "../components/promotion";
 import SubMenu from './SubMenu';
@@ -63,6 +64,12 @@ const Menu = ({dense = false}: MenuProps) => {
                 leftIcon={<product.icon/>}
                 dense={dense} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}/>
             <MenuItemLink
+                to="/orders"
+                state={{_scrollToTop: true}}
+                primaryText={translate(`Đơn hàng`, {
+                    smart_count: 2,
+                })}
+                leftIcon={<order.icon/>}
                 to="/promotion"
                 state={{_scrollToTop: true}}
                 primaryText={translate(`Giảm giá`, {

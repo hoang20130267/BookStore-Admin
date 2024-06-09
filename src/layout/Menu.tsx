@@ -46,6 +46,7 @@ const Menu = ({dense = false}: MenuProps) => {
                     }),
             }}
         >
+            <DashboardMenuItem />
             <MenuItemLink
                 to="/user"
                 state={{_scrollToTop: true}}

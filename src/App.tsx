@@ -36,9 +36,10 @@ import DiscountIcon from '@mui/icons-material/Discount';
 import {PromotionList} from "./components/promotion/PromotionList";
 import PromotionCreate from "./components/promotion/PromotionCreate";
 import PromotionEdit from "./components/promotion/PromotionEdit";
+import {Dashboard} from "./components/dashboard";
 
 function App() {
-    useTokenCheck(authProvider, 60000);
+    useTokenCheck(authProvider, 300000);
     return (
         <Admin
             title="Admin"
@@ -47,6 +48,7 @@ function App() {
             loginPage={Login}
             theme={houseLightTheme}
             layout={Layout}
+            dashboard={Dashboard}
             disableTelemetry
         >
             <Resource name={'user'} icon={People} list={UserList}

@@ -15,84 +15,56 @@ import {
     ReferenceField,
     FunctionField,
     useGetList,
-    useTranslate,
-    useIsDataLoaded,
 } from 'react-admin';
-
-import { stringify } from 'query-string';
-
 import CardWithIcon from './CardWithIcon';
 // import StarRatingField from '../reviews/StarRatingField';
-import { Customer, Review } from './types';
+import { User, Comment } from './types';
 
 const PendingReviews = () => {
-    const { data: reviews, total, isLoading } = useGetList<Review>('review', {
-        filter: { type: 1 },
-        sort: { field: 'reviewedDate', order: 'DESC' },
-        pagination: { page: 1, perPage: 100 },
+    const { data: comment, total } = useGetList<Comment>('comment', {
+        filter: { rating: 5 },
+        sort: { field: 'id', order: 'ASC' },
+        pagination: { page: 1, perPage: 10 },
     });
 
-    console.log("reviews", reviews)
-    const isCustomerDataLoaded = useIsDataLoaded(
-        ['user', 'getMany', { ids: [String(reviews?.[0]?.reviewer)] }],
-        { enabled: !isLoading && reviews && reviews.length > 0 }
-    );
-    const display = isLoading || !isCustomerDataLoaded ? 'none' : 'block';
+    // console.log("comment", comment)
 
     return (
         <CardWithIcon
             to={{
                 pathname: '/comment',
-                search: stringify({
-                    filter: JSON.stringify({ status: 'pending' }),
-                }),
             }}
             icon={CommentIcon}
-            title={"Đánh giá chờ xử lý"}
+            title={"Đánh giá người dùng"}
             subtitle={total}
         >
-            <List sx={{ display }}>
-                {reviews?.map((record: Review) => (
+                <List>
+                {comment?.map((record: Comment) => (
                     <ListItem
                         key={record.id}
-                        button
                         component={Link}
                         to={`/comment/${record.id}`}
                         alignItems="flex-start"
                     >
                         <ListItemAvatar>
-                            <ReferenceField
-                                record={record}
-                                source="reviewer"
-                                reference="user"
-                                link={false}
-                            >
-                                <FunctionField<Customer>
-                                    render={customer => (
-                                        <Avatar
-                                            src={`${customer?.userInfo?.avtUrl}?size=32x32`}
-                                            sx={{
-                                                bgcolor: 'background.paper',
-                                            }}
-                                            alt={`${customer.userInfo.fullName}`}
-                                        />
-                                    )}
-                                />
-                            </ReferenceField>
+                            <Avatar
+                                src={`${record.user.userInfo.avatar}?size=32x32`}
+                                alt={`${record.user.userInfo.fullName}`}
+                            />
                         </ListItemAvatar>
 
-                        {/*<ListItemText*/}
-                        {/*    primary={<StarRatingField record={record} />}*/}
-                        {/*    secondary={record.content}*/}
-                        {/*    sx={{*/}
-                        {/*        overflowY: 'hidden',*/}
-                        {/*        height: '4em',*/}
-                        {/*        display: '-webkit-box',*/}
-                        {/*        WebkitLineClamp: 2,*/}
-                        {/*        WebkitBoxOrient: 'vertical',*/}
-                        {/*        paddingRight: 0,*/}
-                        {/*    }}*/}
-                        {/*/>*/}
+                        <ListItemText
+                            primary={record.user.userInfo.fullName}
+                            secondary={record.cmtDetail}
+                            sx={{
+                                overflowY: 'hidden',
+                                height: '4em',
+                                display: '-webkit-box',
+                                WebkitLineClamp: 2,
+                                WebkitBoxOrient: 'vertical',
+                                paddingRight: 0,
+                            }}
+                        />
                     </ListItem>
                 ))}
             </List>
@@ -100,7 +72,7 @@ const PendingReviews = () => {
             <Button
                 sx={{ borderRadius: 0 }}
                 component={Link}
-                to="/review"
+                to="/comment"
                 size="small"
                 color="primary"
             >

@@ -6,12 +6,11 @@ import {
     ListBase,
     WithListContext,
     SimpleList,
-    useTranslate,
 } from 'react-admin';
 import { subDays } from 'date-fns';
 
 import CardWithIcon from './CardWithIcon';
-import { Customer } from './types';
+import { User } from './types';
 
 const NewCustomers = () => {
 
@@ -22,13 +21,16 @@ const NewCustomers = () => {
     aMonthAgo.setSeconds(0);
     aMonthAgo.setMilliseconds(0);
 
+    const filters = {
+        has_ordered: true,
+        first_seen_gte: aMonthAgo.toISOString(),
+    };
+
+    console.log("Applied Filters:", filters);
     return (
         <ListBase
             resource="user"
-            filter={{
-                has_ordered: true,
-                first_seen_gte: aMonthAgo.toISOString(),
-            }}
+            filter={filters}
             sort={{ field: 'username', order: 'DESC' }}
             perPage={100}
             disableSyncWithLocation
@@ -41,7 +43,7 @@ const NewCustomers = () => {
                     <WithListContext render={({ total }) => <>{total}</>} />
                 }
             >
-                <SimpleList<Customer>
+                <SimpleList<User>
                     primaryText={record => `${record.userInfo.fullName}`}
                     leftAvatar={customer => (
                         <Avatar

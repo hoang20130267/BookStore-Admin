@@ -9,7 +9,6 @@ import {
     CartesianGrid,
     Tooltip,
 } from 'recharts';
-import { useTranslate } from 'react-admin';
 import { format, subDays, addDays } from 'date-fns';
 
 import { Order } from './types';
@@ -23,7 +22,7 @@ const dateFormatter = (date: number): string =>
 
 const aggregateOrdersByDay = (orders: Order[]): { [key: string]: number } =>
     orders
-        .filter((order: Order) => order.status !== 'cancelled')
+        .filter((order: Order) => order.slug !== 'cancelled')
         .reduce((acc, curr) => {
             const day = format(new Date(curr.date), 'yyyy-MM-dd');
             if (!acc[day]) {
@@ -43,12 +42,11 @@ const getRevenuePerDay = (orders: Order[]): TotalByDay[] => {
 
 const OrderChart = (props: { orders?: Order[] }) => {
     const { orders } = props;
-    const translate = useTranslate();
     if (!orders) return null;
 
     return (
         <Card>
-            <CardHeader title={translate('pos.dashboard.month_history')} />
+            <CardHeader title={"Lịch sử đơn hàng"} />
             <CardContent>
                 <div style={{ width: '100%', height: 300 }}>
                     <ResponsiveContainer>

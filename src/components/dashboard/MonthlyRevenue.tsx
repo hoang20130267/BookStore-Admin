@@ -3,9 +3,18 @@ import DollarIcon from '@mui/icons-material/AttachMoney';
 
 import CardWithIcon from './CardWithIcon';
 
-const MonthlyRevenue = () => {
+interface MonthlyRevenueProps {
+    revenue: string;
+}
+
+const MonthlyRevenue: React.FC<MonthlyRevenueProps> = ({ revenue }) => {
     return (
-        <CardWithIcon to="/commands" icon={DollarIcon}/>
+        <CardWithIcon
+            to="/orders"
+            icon={DollarIcon}
+            title="Doanh thu tháng này"
+            subtitle={revenue}
+        />
     );
 };
 

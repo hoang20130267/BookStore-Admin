@@ -19,15 +19,18 @@ import ArticleIcon from '@mui/icons-material/Article';
 import {EditBlog} from "./components/blogs/EditBlog";
 import {CommentList} from "./components/comments/CommentList";
 import CommentIcon from '@mui/icons-material/Comment';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import Layout from "./layout/Layout";
 import {InventoryList} from "./components/inventories/InventoryList";
 import {InventoryCreate} from "./components/inventories/InventoryCreate";
-import { useTokenCheck } from "./provider/UserTokenCheck";
-import { ToastContainer } from 'react-toastify';
+import {useTokenCheck} from "./provider/UserTokenCheck";
+import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ProductCreate} from "./components/products/ProductCreate";
 import {CreateBlogCate} from "./components/blogCates/CreateBlogCate";
 import {ProductShow} from "./components/products/ProductShow";
+import {ProductEdit} from "./components/products/ProductEdit";
+import {OrderList} from "./components/orders/OrderList";
 
 function App() {
     useTokenCheck(authProvider, 60000);
@@ -63,7 +66,12 @@ function App() {
                       list={ProductList}
                       create={ProductCreate}
                       show={ProductShow}
+                      edit={ProductEdit}
                       icon={LocalMallIcon}/>
+            <Resource name="orders"
+                      options={{label: 'Đơn hàng'}}
+                      list={OrderList}
+                      icon={AttachMoneyIcon}/>
             <Resource name="inventories"
                       options={{label: 'Kho'}}
                       list={InventoryList}
@@ -73,7 +81,7 @@ function App() {
                       options={{label: 'Đánh giá'}}
                       list={CommentList}
                       icon={CommentIcon}/>
-            <ToastContainer />
+            <ToastContainer/>
         </Admin>
     );
 }

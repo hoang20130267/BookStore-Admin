@@ -19,7 +19,7 @@ const ListActions = () => (
     </TopToolbar>
 );
 const postFilters = [
-    <SearchInput source="name" alwaysOn/>,
+    <SearchInput source="name" placeholder="Tìm kiếm" alwaysOn/>,
 ];
 const CategoryList = () => (
     <List sort={{field: 'id', order: 'DESC'}}

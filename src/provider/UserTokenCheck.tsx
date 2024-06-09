@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 
 export const useTokenCheck = (authProvider:any, interval:any) => {
     useEffect(() => {

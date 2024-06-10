@@ -10,7 +10,7 @@ import {
 import { Link } from 'react-router-dom';
 import { useReference } from 'react-admin';
 
-import { User, Order } from './types';
+import { User, Order } from '../../types';
 
 interface Props {
     order: Order;

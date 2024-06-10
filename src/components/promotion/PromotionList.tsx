@@ -3,7 +3,7 @@ import {
     BulkDeleteButton, BulkUpdateButton,
     Count, CreateButton,
     DatagridConfigurable,
-    DateField, DeleteButton, EditButton,
+    DateField,  EditButton,
     ExportButton,
     List,
     SelectColumnsButton,
@@ -13,6 +13,7 @@ import {
 } from 'react-admin';
 import { Fragment, useCallback } from 'react';
 import { Divider, Tabs, Tab} from '@mui/material';
+import DeleteButton from "../../layout/DeleteButton";
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -105,7 +106,7 @@ const TabbedDatagrid = () => {
                     <DateField source="startDate" label="Ngày bắt đầu" showDate showTime={false}/>
                     <DateField source="endDate" label="Ngày kết thúc" showDate showTime={false}/>
                     <EditButton/>
-                    <DeleteButton />
+                    <DeleteButton param={"khuyến mãi"}/>
                 </DatagridConfigurable>
             )}
             {filterValues.isCode === '1' && (
@@ -124,7 +125,7 @@ const TabbedDatagrid = () => {
                     <DateField source="startDate" label="Ngày bắt đầu" showDate showTime={false}/>
                     <DateField source="endDate" label="Ngày kết thúc" showDate showTime={false}/>
                     <EditButton/>
-                    <DeleteButton />
+                    <DeleteButton param={"khuyến mãi"}/>
                 </DatagridConfigurable>
             )}
         </Fragment>

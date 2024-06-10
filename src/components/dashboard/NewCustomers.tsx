@@ -10,7 +10,7 @@ import {
 import { subDays } from 'date-fns';
 
 import CardWithIcon from './CardWithIcon';
-import { User } from './types';
+import { User } from '../../types';
 
 const NewCustomers = () => {
 

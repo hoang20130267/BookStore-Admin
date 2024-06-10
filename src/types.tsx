@@ -1,4 +1,4 @@
-import { RaRecord } from 'react-admin';
+import {Identifier, RaRecord } from 'react-admin';
 
 export interface Category extends RaRecord {
     name: string;
@@ -73,7 +73,8 @@ export interface ProductDetail extends RaRecord {
 }
 
 export interface Comment extends RaRecord {
-    user: User;
+    user_id: Identifier;
+    product_id: Identifier;
     rating: number;
     cmtDetail: String;
     created_at: Date;

@@ -26,7 +26,6 @@ const NewCustomers = () => {
         first_seen_gte: aMonthAgo.toISOString(),
     };
 
-    console.log("Applied Filters:", filters);
     return (
         <ListBase
             resource="user"

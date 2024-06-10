@@ -79,7 +79,9 @@ const Dashboard = () => {
         };
     }, [orders]);
 
-    const { pendingOrders } = aggregation;
+    const { recentOrders, pendingOrders } = aggregation;
+
+    // console.log('Aggregated data:', aggregation);
     return (
         <>
             <Welcome />
@@ -90,9 +92,9 @@ const Dashboard = () => {
                         <Spacer />
                         <NbNewOrders nbNewOrders={aggregation.nbNewOrders || 0} />
                     </div>
-                    {/*<div style={styles.singleCol}>*/}
-                    {/*    <OrderChart orders={recentOrders} />*/}
-                    {/*</div>*/}
+                    <div style={styles.singleCol}>
+                        <OrderChart orders={recentOrders} />
+                    </div>
                     <div style={styles.singleCol}>
                         <PendingOrders orders={pendingOrders} />
                     </div>

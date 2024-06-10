@@ -18,25 +18,23 @@ const lastMonthDays = Array.from({ length: 30 }, (_, i) => subDays(lastDay, i));
 const aMonthAgo = subDays(new Date(), 30);
 
 const dateFormatter = (date: number): string =>
-    new Date(date).toLocaleDateString();
+    format(date, 'dd/MM/yyyy');
 
 const aggregateOrdersByDay = (orders: Order[]): { [key: string]: number } =>
-    orders
-        .filter((order: Order) => order.slug !== 'cancelled')
-        .reduce((acc, curr) => {
-            const day = format(new Date(curr.date), 'yyyy-MM-dd');
-            if (!acc[day]) {
-                acc[day] = 0;
-            }
-            acc[day] += curr.total;
-            return acc;
-        }, {} as { [key: string]: number });
+    orders.reduce((acc, curr) => {
+        const day = format(new Date(curr.orderDate), 'yyyy-dd-MM');
+        if (!acc[day]) {
+            acc[day] = 0;
+        }
+        acc[day] += curr.orderTotal;
+        return acc;
+    }, {} as { [key: string]: number });
 
 const getRevenuePerDay = (orders: Order[]): TotalByDay[] => {
     const daysWithRevenue = aggregateOrdersByDay(orders);
     return lastMonthDays.map(date => ({
         date: date.getTime(),
-        total: daysWithRevenue[format(new Date(date), 'yyyy-MM-dd')] || 0,
+        total: daysWithRevenue[format(date, 'yyyy-MM-dd')] || 0,
     }));
 };
 
@@ -78,18 +76,22 @@ const OrderChart = (props: { orders?: Order[] }) => {
                                 scale="time"
                                 domain={[
                                     addDays(aMonthAgo, 1).getTime(),
-                                    new Date().getTime(),
+                                    lastDay.getTime(),
                                 ]}
                                 tickFormatter={dateFormatter}
                             />
-                            <YAxis dataKey="total" name="Revenue" unit="€" />
+                            <YAxis
+                                dataKey="total"
+                                name="Revenue"
+                                unit="₫"
+                            />
                             <CartesianGrid strokeDasharray="3 3" />
                             <Tooltip
                                 cursor={{ strokeDasharray: '3 3' }}
                                 formatter={(value: any) =>
-                                    new Intl.NumberFormat(undefined, {
+                                    new Intl.NumberFormat('vi-VN', {
                                         style: 'currency',
-                                        currency: 'USD',
+                                        currency: 'VND',
                                     }).format(value)
                                 }
                                 labelFormatter={(label: any) =>

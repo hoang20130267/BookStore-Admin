@@ -11,8 +11,8 @@ import {
     TextField,
     DateField,
     EditButton,
-    DeleteButton,
 } from "react-admin";
+import DeleteButton from "../../layout/DeleteButton";
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -53,7 +53,7 @@ export const BlogCateList = () => (
             <TextField source="updatedBy.userInfo.fullName" label="Người cập nhật"/>
             <DateField source="updatedAt" label="Ngày cập nhật"/>
             <EditButton />
-            <DeleteButton />
+            <DeleteButton param={"danh mục tin tức"}/>
         </DatagridConfigurable>
     </List>
 );

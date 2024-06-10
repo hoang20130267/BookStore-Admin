@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ContactSearch} from "./ContactSearch";
-import { EditButton, DeleteButton } from 'react-admin';
+import { EditButton } from 'react-admin';
 import {
     ExportButton,
     TopToolbar,
@@ -12,6 +12,7 @@ import {
     DateField,
     BooleanField
 } from "react-admin";
+import DeleteButton from "../../layout/DeleteButton";
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -55,7 +56,7 @@ export const ContactList = () => (
             />
             <DateField source="createdDate" label="Ngày tạo" showDate showTime={false}/>
             <EditButton/>
-            <DeleteButton />
+            <DeleteButton param={"liên lạc"}/>
         </DatagridConfigurable>
     </List>
 );

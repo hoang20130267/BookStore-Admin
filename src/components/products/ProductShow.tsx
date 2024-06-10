@@ -57,7 +57,7 @@ export const ProductShow = () => {
                 <Grid item xs={11} sm={8}>
                     <Stack spacing={2}>
                         <Labeled label="Mã sản phẩm">
-                            <TextField source="id" sx={{fontSize: 'larger'}}/>
+                            <TextField source="detail.productSku" sx={{fontSize: 'larger'}}/>
                         </Labeled>
                         <TextField source="title" sx={{fontSize: '25px', fontWeight: 'bold'}}/>
                         <ChipField source="category.name" sx={{width: 'fit-content'}}/>

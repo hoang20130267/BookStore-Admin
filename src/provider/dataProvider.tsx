@@ -281,6 +281,47 @@ export const dataProvider: DataProvider = {
                     credentials: 'include'
                 })
             }
+            if(resource==='products'){
+                let imageUrl = '';
+                if (params.data.imageNew && params.data.imageNew.rawFile instanceof File) {
+                    const formData = new FormData();
+
+                    formData.append('image', params.data.imageNew.rawFile);
+
+                    const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const data = await response.json();
+                    imageUrl = data.data.url;
+                }
+                let subImageUrls = [];
+                if (params.data.imagesNew && params.data.imagesNew.length > 0) {
+                    for (const file of params.data.imagesNew) {
+                        if (file.rawFile instanceof File) {
+                            const formData = new FormData();
+                            formData.append('image', file.rawFile);
+
+                            const response = await fetch('https://api.imgbb.com/1/upload?key=c383fa3727851be15a713c4c41085099', {
+                                method: 'POST',
+                                body: formData,
+                            });
+                            const data = await response.json();
+                            subImageUrls.push({image: data.data.url});
+                        }
+                    }
+                }
+                response = await httpClient(`${apiUrl}/${resource}/edit/${params.id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({...params.data, image: imageUrl, images: subImageUrls}),
+                    headers: new Headers({
+                        'Authorization': `${adminInfo.type} ${adminInfo.token}`,
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json',
+                    }),
+                    credentials: 'include'
+                })
+            }
             if (response) {
                 const data = await response.json;
                 window.location.href = `/#/${resource}`;

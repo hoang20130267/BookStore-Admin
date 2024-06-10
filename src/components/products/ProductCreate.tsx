@@ -5,7 +5,8 @@ import {
     Create,
     DateInput,
     ImageField,
-    ImageInput, minValue,
+    ImageInput,
+    minValue,
     NumberInput,
     required,
     SelectInput,
@@ -14,14 +15,13 @@ import {
     useGetList
 } from "react-admin";
 import {RichTextInput} from "ra-input-rich-text";
-import {Grid, Typography} from "@mui/material";
+import {Grid} from "@mui/material";
 
 export const ProductCreate = () => {
     const [mainCategories, setMainCategories] = useState<Category[]>([]);
     const [subCategories, setSubCategories] = useState<Category[]>([]);
     const [selectedMainCategory, setSelectedMainCategory] = useState<string | null>(null);
 
-    console.log(selectedMainCategory)
     const {data: mainData}: any = useGetList<Category>('categories', {
         filter: {parentCategory: 1, active: true},
         sort: {field: 'name', order: 'ASC'},
@@ -112,7 +112,7 @@ export const ProductCreate = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextInput source="detail.size" label="Kích cỡ" sx={{marginRight: '1em'}}/>
-                            <NumberInput source="detail.quantityOfPage" label="Số trang" validate={[minValue(1)]}/>
+                            <NumberInput source="detail.quantityOfPage" label="Số trang" defaultValue={-1} validate={[minValue(-1)]}/>
                         </Grid>
                         <Grid item xs={12}>
                             <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth value={req}/>

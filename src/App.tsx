@@ -34,12 +34,13 @@ import {ProductEdit} from "./components/products/ProductEdit";
 import {OrderList} from "./components/orders/OrderList";
 import {BlogCateList} from "./components/blogCates/BlogCateList";
 import {EditBlogCate} from "./components/blogCates/EditBlogCate";
-import { ContactList } from "./components/contact/ContactList";
-import { ReplyContact } from "./components/contact/ReplyContact";
+import {ContactList} from "./components/contact/ContactList";
+import {ReplyContact} from "./components/contact/ReplyContact";
 import DiscountIcon from '@mui/icons-material/Discount';
 import {PromotionList} from "./components/promotion/PromotionList";
 import PromotionCreate from "./components/promotion/PromotionCreate";
 import PromotionEdit from "./components/promotion/PromotionEdit";
+import OrderEdit from "./components/orders/OrderEdit";
 import {Dashboard} from "./components/dashboard";
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
             <Resource name="orders"
                       options={{label: 'Đơn hàng'}}
                       list={OrderList}
+                      edit={OrderEdit}
                       icon={AttachMoneyIcon}/>
             <Resource name="promotion"
                       options={{label: 'Giảm giá'}}
@@ -105,7 +107,7 @@ function App() {
                       list={ContactList}
                       edit={ReplyContact}
                       icon={ContactMailIcon}/>
-            <ToastContainer />
+            <ToastContainer/>
         </Admin>
     );
 }

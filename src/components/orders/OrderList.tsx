@@ -30,10 +30,10 @@ export const OrderList = () => {
             actions={<ListActions/>}
             sx={{width: '100%'}}
         >
-            <DatagridConfigurable rowClick="show">
+            <DatagridConfigurable rowClick="edit">
                 <TextField source="orderDate" label="Ngày đặt hàng"/>
                 <ChipField source="orderCode" label="Mã đơn hàng"/>
-                <TextField source="user.userInfo.fullName" label="Người dùng"/>
+                <TextField source="shippingAddress.fullName" label="Người dùng"/>
                 <FunctionField<Order> source="shippingAddress" label="Địa chỉ"
                                       render={(record) => `${record.shippingAddress.hnumSname}, 
                                ${record.shippingAddress.wardCommune}, 

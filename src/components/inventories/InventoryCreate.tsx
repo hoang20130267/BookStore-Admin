@@ -14,7 +14,6 @@ import {useEffect, useState} from "react";
 
 export const InventoryCreate = () => {
     const [products, setProducts] = useState<Product[]>([]);
-    console.log(products)
     const {data}: any = useGetList<Product>('products', {
         sort: {field: 'id', order: 'DESC'},
         pagination: {page: 1, perPage: 100}

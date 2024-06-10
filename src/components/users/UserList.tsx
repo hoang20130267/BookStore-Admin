@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {UserSearch} from "./UserSearch";
-import { EditButton, DeleteButton } from 'react-admin';
+import { EditButton } from 'react-admin';
 import {
     CreateButton,
     ExportButton,
@@ -14,6 +14,7 @@ import {
     BooleanField
 } from "react-admin";
 import { Avatar} from '@mui/material';
+import DeleteButton from "../../layout/DeleteButton";
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -66,7 +67,7 @@ export const UserList = () => (
             <DateField source="createdAt" label="Ngày tạo" showDate showTime={false}/>
             <DateField source="updatedAt" label="Ngày cập nhật" showDate showTime={false}/>
             <EditButton />
-            <DeleteButton />
+            <DeleteButton param={"người dùng"}/>
         </DatagridConfigurable>
     </List>
 );

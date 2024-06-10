@@ -18,7 +18,7 @@ import {
 } from 'react-admin';
 import CardWithIcon from './CardWithIcon';
 // import StarRatingField from '../reviews/StarRatingField';
-import { User, Comment } from './types';
+import { User, Comment } from '../../types';
 
 const PendingReviews = () => {
     const { data: comment, total } = useGetList<Comment>('comment', {

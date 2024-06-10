@@ -1,7 +1,6 @@
 import {
     CreateButton,
     DatagridConfigurable,
-    DeleteButton,
     EditButton,
     ExportButton,
     List,
@@ -10,6 +9,7 @@ import {
     TextField,
     TopToolbar
 } from "react-admin";
+import DeleteButton from "../../layout/DeleteButton";
 
 const ListActions = () => (
     <TopToolbar>
@@ -35,7 +35,7 @@ const CategoryList = () => (
             <TextField source="updatedBy.username" label="Cập nhật bởi"/>
             <TextField source="updatedAt" label="Ngày cập nhật"/>
             <EditButton/>
-            <DeleteButton/>
+            <DeleteButton param={"danh mục sản phẩm"}/>
         </DatagridConfigurable>
     </List>
 );

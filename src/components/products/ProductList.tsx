@@ -2,7 +2,7 @@ import {
     BooleanField,
     ChipField,
     CreateButton,
-    DatagridConfigurable, DateInput, DeleteButton, EditButton,
+    DatagridConfigurable, DateInput, EditButton,
     ExportButton, ImageField,
     List, NumberField,
     SearchInput,
@@ -10,6 +10,7 @@ import {
     TopToolbar
 } from "react-admin";
 import * as React from "react";
+import DeleteButton from "../../layout/DeleteButton";
 
 const ListActions = () => (
     <TopToolbar>
@@ -48,7 +49,7 @@ export const ProductList = () => (
             <TextField source="updatedAt" label="Ngày cập nhật"/>
             <BooleanField source="active" label="Trạng thái"/>
             {/*<EditButton/>*/}
-            {/*<DeleteButton/>*/}
+            {/*<DeleteButton param={"sản phẩm"}/>*/}
         </DatagridConfigurable>
     </List>
 );

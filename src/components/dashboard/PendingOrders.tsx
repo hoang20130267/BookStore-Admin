@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Card, CardHeader, List } from '@mui/material';
 
-import { Order } from './types';
+import { Order } from '../../types';
 import { PendingOrder } from './PendingOrder';
 
 interface Props {

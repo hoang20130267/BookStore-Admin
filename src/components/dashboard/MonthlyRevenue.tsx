@@ -7,10 +7,10 @@ interface MonthlyRevenueProps {
     revenue: string;
 }
 
-const MonthlyRevenue: React.FC<MonthlyRevenueProps> = ({ revenue }) => {
+const MonthlyRevenue: React.FC<MonthlyRevenueProps> = ({revenue}) => {
     return (
         <CardWithIcon
-            to="/orders"
+            to={`/orders?filter=%7B"slug"%3A"delivered"%7D`}
             icon={DollarIcon}
             title="Doanh thu tháng này"
             subtitle={revenue}

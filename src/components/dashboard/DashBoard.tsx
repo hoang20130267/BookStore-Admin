@@ -51,16 +51,13 @@ const Dashboard = () => {
             .filter(order => order.status.slug !== 'cancelled')
             .reduce(
                 (stats: OrderStats, order) => {
-                    if (order.status.slug !== 'cancelled') {
-                        stats.nbNewOrders++;
-                    }
-
                     if (order.status.slug === 'delivered') {
                         stats.revenue += order.orderTotal;
                     }
 
                     if (order.status.slug === 'pending') {
                         stats.pendingOrders.push(order);
+                        stats.nbNewOrders++;
                     }
                     return stats;
                 },

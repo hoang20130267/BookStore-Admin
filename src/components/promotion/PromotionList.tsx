@@ -1,18 +1,19 @@
 import * as React from 'react';
 import {
+    ArrayField,
     BulkDeleteButton, BulkUpdateButton,
     Count, CreateButton,
     DatagridConfigurable,
-    DateField,  EditButton,
+    DateField, EditButton,
     ExportButton,
     List,
-    SelectColumnsButton,
+    SelectColumnsButton, ShowButton,
     TextField,
     TopToolbar,
     useListContext,
 } from 'react-admin';
-import { Fragment, useCallback } from 'react';
-import { Divider, Tabs, Tab} from '@mui/material';
+import {Fragment, useCallback} from 'react';
+import {Divider, Tabs, Tab, Box} from '@mui/material';
 import DeleteButton from "../../layout/DeleteButton";
 
 const VisitorListActions = () => (
@@ -37,22 +38,22 @@ export const PromotionList = () => (
               },
           }}
     >
-        <TabbedDatagrid />
+        <TabbedDatagrid/>
     </List>
 );
 const tabs = [
-    { id: '0', name: 'Discount Product' },
-    { id: '1', name: 'Voucher' },
+    {id: '0', name: 'Discount Product'},
+    {id: '1', name: 'Voucher'},
 ];
 const TabbedDatagrid = () => {
     const listContext = useListContext();
-    const { filterValues, setFilters, displayedFilters } = listContext;
+    const {filterValues, setFilters, displayedFilters} = listContext;
 
     const handleChange = useCallback(
         (event: React.ChangeEvent<{}>, value: any) => {
             setFilters &&
             setFilters(
-                { ...filterValues, isCode: value },
+                {...filterValues, isCode: value},
                 displayedFilters,
                 false
             );
@@ -80,7 +81,7 @@ const TabbedDatagrid = () => {
                                     ...filterValues,
                                     isCode: choice.id,
                                 }}
-                                sx={{ lineHeight: 'inherit' }}
+                                sx={{lineHeight: 'inherit'}}
                             />
                             )
                         </span>
@@ -89,10 +90,10 @@ const TabbedDatagrid = () => {
                     />
                 ))}
             </Tabs>
-            <Divider />
+            <Divider/>
             {filterValues.isCode === '0' && (
                 <DatagridConfigurable
-                    rowClick="show"
+                    rowClick={false}
                     bulkActionButtons={
                         <>
                             <BulkUpdateButton data={{stock: 100}} label="Refill stock"/>
@@ -105,8 +106,19 @@ const TabbedDatagrid = () => {
                     <TextField source="discount" label="Giảm giá"/>
                     <DateField source="startDate" label="Ngày bắt đầu" showDate showTime={false}/>
                     <DateField source="endDate" label="Ngày kết thúc" showDate showTime={false}/>
-                    <EditButton/>
-                    <DeleteButton param={"khuyến mãi"}/>
+                    <ArrayField label={"Hành động"} textAlign={"center"}>
+                        <Box display={{xs: 'block', sm: 'flex', width: '100%'}}>
+                            <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
+                                <ShowButton/>
+                            </Box>
+                            <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
+                                <EditButton/>
+                            </Box>
+                            <Box flex={1} ml={{xs: 0, sm: '0.5em'}}>
+                                <DeleteButton param={"khuyến mãi"}/>
+                            </Box>
+                        </Box>
+                    </ArrayField>
                 </DatagridConfigurable>
             )}
             {filterValues.isCode === '1' && (
@@ -124,8 +136,19 @@ const TabbedDatagrid = () => {
                     <TextField source="discount" label="Giảm giá"/>
                     <DateField source="startDate" label="Ngày bắt đầu" showDate showTime={false}/>
                     <DateField source="endDate" label="Ngày kết thúc" showDate showTime={false}/>
-                    <EditButton/>
-                    <DeleteButton param={"khuyến mãi"}/>
+                    <ArrayField label={"Hành động"} textAlign={"center"}>
+                        <Box display={{xs: 'block', sm: 'flex', width: '100%'}}>
+                            <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
+                                <ShowButton/>
+                            </Box>
+                            <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
+                                <EditButton/>
+                            </Box>
+                            <Box flex={1} ml={{xs: 0, sm: '0.5em'}}>
+                                <DeleteButton param={"khuyến mãi"}/>
+                            </Box>
+                        </Box>
+                    </ArrayField>
                 </DatagridConfigurable>
             )}
         </Fragment>

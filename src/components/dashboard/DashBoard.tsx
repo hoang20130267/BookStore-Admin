@@ -1,6 +1,6 @@
-import React, { useMemo} from 'react';
-import { useGetList } from 'react-admin';
-import { subDays, startOfDay } from 'date-fns';
+import React, {useMemo} from 'react';
+import {useGetList} from 'react-admin';
+import {subDays, startOfDay} from 'date-fns';
 
 import Welcome from './Welcome';
 import MonthlyRevenue from './MonthlyRevenue';
@@ -26,23 +26,23 @@ interface State {
 }
 
 const styles = {
-    flex: { display: 'flex' },
-    flexColumn: { display: 'flex', flexDirection: 'column' },
-    leftCol: { flex: 1, marginRight: '0.5em' },
-    rightCol: { flex: 1, marginLeft: '0.5em' },
-    singleCol: { marginTop: '1em', marginBottom: '1em' },
+    flex: {display: 'flex'},
+    flexColumn: {display: 'flex', flexDirection: 'column'},
+    leftCol: {flex: 1, marginRight: '0.5em'},
+    rightCol: {flex: 1, marginLeft: '0.5em'},
+    singleCol: {marginTop: '1em', marginBottom: '1em'},
 };
 
 
-const Spacer = () => <span style={{ width: '1em' }} />;
+const Spacer = () => <span style={{width: '1em'}}/>;
 
 const Dashboard = () => {
     const aMonthAgo = useMemo(() => subDays(startOfDay(new Date()), 30), []);
 
-    const { data: orders } = useGetList<Order>('orders', {
-        filter: { date_gte: aMonthAgo.toISOString() },
-        sort: { field: 'orderDate', order: 'DESC' },
-        pagination: { page: 1, perPage: 50 },
+    const {data: orders} = useGetList<Order>('orders', {
+        filter: {date_gte: aMonthAgo.toISOString()},
+        sort: {field: 'orderDate', order: 'DESC'},
+        pagination: {page: 1, perPage: 50},
     });
 
     const aggregation = useMemo<State>(() => {
@@ -52,10 +52,14 @@ const Dashboard = () => {
             .reduce(
                 (stats: OrderStats, order) => {
                     if (order.status.slug !== 'cancelled') {
-                        stats.revenue += order.orderTotal;
                         stats.nbNewOrders++;
                     }
-                    if (order.status.slug === 'confirmed') {
+
+                    if (order.status.slug === 'delivered') {
+                        stats.revenue += order.orderTotal;
+                    }
+
+                    if (order.status.slug === 'pending') {
                         stats.pendingOrders.push(order);
                     }
                     return stats;
@@ -79,31 +83,31 @@ const Dashboard = () => {
         };
     }, [orders]);
 
-    const { recentOrders, pendingOrders } = aggregation;
+    const {recentOrders, pendingOrders} = aggregation;
 
     // console.log('Aggregated data:', aggregation);
     return (
         <>
-            <Welcome />
+            <Welcome/>
             <div style={styles.flex}>
                 <div style={styles.leftCol}>
                     <div style={styles.flex}>
-                        <MonthlyRevenue revenue={aggregation.revenue || "0đ"} />
-                        <Spacer />
-                        <NbNewOrders nbNewOrders={aggregation.nbNewOrders || 0} />
+                        <MonthlyRevenue revenue={aggregation.revenue || "0đ"}/>
+                        <Spacer/>
+                        <NbNewOrders nbNewOrders={aggregation.nbNewOrders || 0}/>
                     </div>
                     <div style={styles.singleCol}>
-                        <OrderChart orders={recentOrders} />
+                        <OrderChart orders={recentOrders}/>
                     </div>
                     <div style={styles.singleCol}>
-                        <PendingOrders orders={pendingOrders} />
+                        <PendingOrders orders={pendingOrders}/>
                     </div>
                 </div>
                 <div style={styles.rightCol}>
                     <div style={styles.flex}>
-                        <PendingReviews />
-                        <Spacer />
-                        <NewCustomers />
+                        <PendingReviews/>
+                        <Spacer/>
+                        <NewCustomers/>
                     </div>
                 </div>
             </div>

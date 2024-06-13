@@ -124,7 +124,10 @@ const OrderTotals = () => {
 }
 
 const OrderForm = () => {
+    const record = useRecordContext();
     const [status, setStatus] = useState<OrderStatus[]>([]);
+    const [currentStatusId, setCurrentStatusId] = useState<number>(record?.status?.id);
+
     const fetchStatus = async () => {
         const result = await axios.get("http://localhost:8080/api/orders/status")
         if (result.data) {
@@ -136,6 +139,7 @@ const OrderForm = () => {
         fetchStatus();
     }, []);
 
+    const filteredStatus = status.filter(s => s.id >= currentStatusId);
 
     return (
         <SimpleForm>
@@ -157,7 +161,7 @@ const OrderForm = () => {
                             <SelectInput
                                 source="status.id"
                                 label="Trạng thái"
-                                choices={status}
+                                choices={filteredStatus}
                                 validate={req}
                             />
                         </Grid>
@@ -179,7 +183,7 @@ const OrderForm = () => {
                                 </Labeled>
                             </Grid>
                             <Grid item xs={12} md={6}>
-                                <Labeled label="Địa chỉ giao hàng">
+                                <Labeled label="Số điện thoại">
                                     <TextField source="shippingAddress.phoneNumber"
                                                sx={{fontSize: '1rem'}}/>
                                 </Labeled>

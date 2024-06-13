@@ -12,6 +12,7 @@ import {
     TopToolbar
 } from "react-admin";
 import * as React from "react";
+import {Inventory} from "../../type";
 
 const postFilters = [
     <SearchInput source="q" placeholder="Tìm kiếm" alwaysOn/>,
@@ -19,19 +20,27 @@ const postFilters = [
 
 const ListActions = () => (
     <TopToolbar>
-        {/*<FilterButton filters={postFilters} disableSaveQuery/>*/}
         <SelectColumnsButton/>
         <CreateButton/>
         <ExportButton/>
     </TopToolbar>
 );
+const rowStyle = (record: Inventory, index: number) => {
+    if (record.remainingQuantity === 0) {
+        return {backgroundColor: '#ff6666'};
+    } else if (record.remainingQuantity < 10) {
+        return {backgroundColor: '#ffcccc'};
+    } else {
+        return {backgroundColor: 'white'};
+    }
+};
 export const InventoryList = () => (
     <List sort={{field: 'id', order: 'ASC'}}
           perPage={10}
           filters={postFilters}
           actions={<ListActions/>}
     >
-        <DatagridConfigurable>
+        <DatagridConfigurable rowStyle={rowStyle}>
             <TextField source="id" label="ID"/>
             <TextField source="product.title" label="Tên sản phẩm"/>
             <NumberField source="importPrice"

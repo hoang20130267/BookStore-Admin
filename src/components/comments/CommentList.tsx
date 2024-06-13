@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { CommentSearch } from "./CommentSearch";
+import {CommentSearch} from "./CommentSearch";
 import {
     ExportButton,
     TopToolbar,
     SelectColumnsButton,
     DatagridConfigurable,
     BulkUpdateButton,
-    BulkDeleteButton,
+    BulkDeleteButton, ArrayField, ShowButton,
 } from 'react-admin';
 import {
     List,
@@ -14,9 +14,9 @@ import {
     DateField,
 } from "react-admin";
 import RatingField from './RatingField';
-import { matchPath, useLocation, useNavigate } from 'react-router-dom';
-import { useCallback} from 'react';
-import { Box, Drawer } from '@mui/material';
+import {matchPath, useLocation, useNavigate} from 'react-router-dom';
+import {useCallback} from 'react';
+import {Box, Drawer} from '@mui/material';
 import CommentShow from "./CommentShow";
 import DeleteButton from "../../layout/DeleteButton";
 
@@ -38,10 +38,10 @@ export const CommentList = () => {
     return (
         <Box display="flex">
             <List
-                sort={{ field: 'id', order: 'DESC' }}
+                sort={{field: 'id', order: 'DESC'}}
                 perPage={5}
-                actions={<VisitorListActions />}
-                filters={<CommentSearch />}
+                actions={<VisitorListActions/>}
+                filters={<CommentSearch/>}
                 sx={{
                     '& .column-title': {
                         maxWidth: '16em',
@@ -61,21 +61,31 @@ export const CommentList = () => {
                 }}
             >
                 <DatagridConfigurable
-                    rowClick="show"
+                    rowClick={false}
                     bulkActionButtons={
                         <>
-                            <BulkUpdateButton data={{ stock: 100 }} label="Refill stock" />
-                            <BulkDeleteButton />
+                            <BulkUpdateButton data={{stock: 100}} label="Refill stock"/>
+                            <BulkDeleteButton/>
                         </>
                     }
                 >
-                    <TextField source="id" label="ID" />
-                    <TextField source="user.username" label="Người bình luận" />
-                    <TextField source="cmtDetail" label="Người tạo" />
-                    <RatingField source="rating" label="Số sao" />
-                    <DateField source="created_at" label="Ngày tạo" />
-                    <DateField source="updated_at" label="Ngày tạo" />
-                    <DeleteButton param={"bình luận"}/>
+                    <TextField source="id" label="ID"/>
+                    <TextField source="user.username" label="Người bình luận"/>
+                    <TextField source="cmtDetail" label="Người tạo"/>
+                    <RatingField source="rating" label="Số sao"/>
+                    <DateField source="created_at" label="Ngày tạo"/>
+                    <DateField source="updated_at" label="Ngày tạo"/>
+
+                    <ArrayField label={"Hành động"} textAlign={"center"}>
+                        <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+                            <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+                        <ShowButton/>
+                            </Box>
+                            <Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+                        <DeleteButton param={"bình luận"}/>
+                            </Box>
+                        </Box>
+                    </ArrayField>
                 </DatagridConfigurable>
             </List>
             <Drawer
@@ -83,12 +93,12 @@ export const CommentList = () => {
                 open={!!match}
                 anchor="right"
                 onClose={handleClose}
-                sx={{ zIndex: 100 }}
+                sx={{zIndex: 100}}
             >
                 {!!match && (
                     <CommentShow
                         id={(match as any).params.id}
-                        onCancel={handleClose} children={undefined} />
+                        onCancel={handleClose} children={undefined}/>
                 )}
             </Drawer>
         </Box>

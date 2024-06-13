@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {UserSearch} from "./UserSearch";
-import { EditButton } from 'react-admin';
+import {ArrayField, EditButton, ShowButton} from 'react-admin';
 import {
     CreateButton,
     ExportButton,
     TopToolbar,
-    SelectColumnsButton,DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
+    SelectColumnsButton, DatagridConfigurable, BulkUpdateButton, BulkDeleteButton
 } from 'react-admin';
 import {
     List,
@@ -13,7 +13,7 @@ import {
     DateField,
     BooleanField
 } from "react-admin";
-import { Avatar} from '@mui/material';
+import {Avatar, Box} from '@mui/material';
 import DeleteButton from "../../layout/DeleteButton";
 
 const VisitorListActions = () => (
@@ -40,7 +40,7 @@ export const UserList = () => (
           }}
     >
         <DatagridConfigurable
-            rowClick="show"
+            rowClick={false}
             bulkActionButtons={
                 <>
                     <BulkUpdateButton data={{stock: 100}} label="Refill stock"/>
@@ -52,22 +52,31 @@ export const UserList = () => (
             <TextField source="userInfo.fullName" label="Họ và tên "/>
             <Avatar
                 src="avatar"
-                style={{ width: parseInt("25", 10), height: parseInt("25", 10) }}
+                style={{width: parseInt("25", 10), height: parseInt("25", 10)}}
             />
             <TextField source="email" label="Email"/>
             <TextField source="userInfo.phoneNumber" label="Số điện thoại"/>
             <BooleanField
                 source="locked"
-                sx={{ mt: -0.5, mb: -0.5 }}
+                sx={{mt: -0.5, mb: -0.5}}
             />
             <BooleanField
                 source="isSocial"
-                sx={{ mt: -0.5, mb: -0.5 }}
+                sx={{mt: -0.5, mb: -0.5}}
             />
             <DateField source="createdAt" label="Ngày tạo" showDate showTime={false}/>
             <DateField source="updatedAt" label="Ngày cập nhật" showDate showTime={false}/>
-            <EditButton />
-            <DeleteButton param={"người dùng"}/>
+            <ArrayField label={"Hành động"} textAlign={"center"}>
+                <Box display={{xs: 'block', sm: 'flex', width: '100%'}}>
+                    <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
+                        <ShowButton/>
+                    </Box>
+                    <EditButton/>
+                    <Box flex={1} ml={{xs: 0, sm: '0.5em'}}>
+                        <DeleteButton param={"người dùng"}/>
+                    </Box>
+                </Box>
+            </ArrayField>
         </DatagridConfigurable>
     </List>
 );

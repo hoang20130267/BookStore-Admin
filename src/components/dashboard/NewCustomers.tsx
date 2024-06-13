@@ -22,8 +22,7 @@ const NewCustomers = () => {
     aMonthAgo.setMilliseconds(0);
 
     const filters = {
-        has_ordered: true,
-        first_seen_gte: aMonthAgo.toISOString(),
+       role: 'USER',
     };
 
     return (
@@ -37,7 +36,7 @@ const NewCustomers = () => {
             <CardWithIcon
                 to="/user"
                 icon={CustomerIcon}
-                title={"Khách hàng mới"}
+                title={"Người dùng"}
                 subtitle={
                     <WithListContext render={({ total }) => <>{total}</>} />
                 }

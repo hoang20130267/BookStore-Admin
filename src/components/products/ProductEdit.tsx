@@ -21,8 +21,8 @@ import {Category, Product} from "../../type";
 import {useWatch} from "react-hook-form";
 
 const validateSubImages = (value: string | any[]) => {
-    if (value && value.length > 4) {
-        return 'Danh sách ảnh phụ không được vượt quá 4 ảnh';
+    if (value && value.length > 5) {
+        return 'Danh sách ảnh phụ không được vượt quá 5 ảnh';
     }
     return undefined;
 };
@@ -34,12 +34,12 @@ const MainImage = () => {
             <Labeled label="Ảnh chính">
                 <ImageField source="image"/>
             </Labeled>
-            <ImageInput source="imageNew" label="Thêm ảnh chính mới cho sản phẩm">
+            <ImageInput source="imageNew" label="Thêm ảnh chính mới cho sản phẩm" placeholder="Thả ảnh để tải lên hoặc nhấp để chọn ảnh.">
                 <ImageField source="src"/>
             </ImageInput>
         </>)
         :
-        (<ImageInput name="image" source="image" label="Thêm ảnh chính mới cho sản phẩm">
+        (<ImageInput name="image" source="image" label="Thêm ảnh chính mới cho sản phẩm" placeholder="Thả ảnh để tải lên hoặc nhấp để chọn ảnh.">
             <ImageField source="src" label="Ảnh chính"/>
         </ImageInput>);
 }
@@ -52,12 +52,12 @@ const SubImages = () => {
                 <ImageField source="images" src="image"/>
             </Labeled>
             <ImageInput source="imagesNew" accept="image/*" multiple validate={validateSubImages}
-                        label="Thêm danh sách ảnh phụ mới cho sản phẩm">
+                        label="Thêm danh sách ảnh phụ mới cho sản phẩm" placeholder="Thả một số hình ảnh để tải lên hoặc nhấp để chọn một hình ảnh.">
                 <ImageField source="src"/>
             </ImageInput>
         </>)
         :
-        (<ImageInput name="images" source="images" multiple>
+        (<ImageInput name="images" source="images" multiple placeholder="Thả một số hình ảnh để tải lên hoặc nhấp để chọn một hình ảnh.">
             <ImageField source="src" label="Danh sách ảnh phụ"/>
         </ImageInput>);
 }
@@ -132,7 +132,7 @@ export const ProductEdit = () => {
                 <TabbedForm.Tab label="Chi tiết sản phẩm">
                     <Grid container>
                         <Grid item xs={12}>
-                            <TextInput source="detail.supplier" label="Nhà cung cấp" sx={{marginRight: '1em'}}/>
+                            <TextInput source="detail.supplier" label="Nhà cung cấp" sx={{marginRight: '1em'}} validate={req}/>
                             <TextInput source="detail.publisher" label="Nhà xuất bản"/>
                         </Grid>
                         <Grid item xs={12}>
@@ -153,7 +153,7 @@ export const ProductEdit = () => {
                             <NumberInput source="detail.quantityOfPage" label="Số trang" validate={[minValue(-1)]}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth value={req}/>
+                            <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth validate={req}/>
                         </Grid>
                     </Grid>
                 </TabbedForm.Tab>
@@ -161,4 +161,4 @@ export const ProductEdit = () => {
         </Edit>
     );
 };
-const req = [required()];
+const req = [required('Không được để trống')];

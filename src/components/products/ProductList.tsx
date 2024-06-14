@@ -1,16 +1,23 @@
 import {
+    ArrayField,
     BooleanField,
     ChipField,
     CreateButton,
-    DatagridConfigurable, DateInput, EditButton,
-    ExportButton, ImageField,
-    List, NumberField,
+    DatagridConfigurable,
+    EditButton,
+    ExportButton,
+    ImageField,
+    List,
+    NumberField,
     SearchInput,
-    SelectColumnsButton, TextField,
+    SelectColumnsButton,
+    ShowButton,
+    TextField,
     TopToolbar
 } from "react-admin";
 import * as React from "react";
 import DeleteButton from "../../layout/DeleteButton";
+import Box from "@mui/material/Box";
 
 const ListActions = () => (
     <TopToolbar>
@@ -48,8 +55,11 @@ export const ProductList = () => (
             <TextField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedAt" label="Ngày cập nhật"/>
             <BooleanField source="active" label="Trạng thái"/>
-            {/*<EditButton/>*/}
-            {/*<DeleteButton param={"sản phẩm"}/>*/}
+            <Box display={{xs: 'block', sm: 'flex', width: '100%'}}>
+                <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
+                    <EditButton/>
+                </Box>
+            </Box>
         </DatagridConfigurable>
     </List>
 );

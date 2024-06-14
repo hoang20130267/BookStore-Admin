@@ -85,7 +85,7 @@ export const ProductShow = () => {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Labeled label="Ngày tạo">
-                        <DateField source="createdAt"/>
+                        <TextField source="createdAt"/>
                     </Labeled>
                 </Grid>
             </Grid>

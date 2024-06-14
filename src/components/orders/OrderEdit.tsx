@@ -127,6 +127,7 @@ const OrderForm = () => {
     const record = useRecordContext();
     const [status, setStatus] = useState<OrderStatus[]>([]);
     const [currentStatusId, setCurrentStatusId] = useState<number>(record?.status?.id);
+    const [currentStatusSlug, setCurrentStatusSlug] = useState<string>(record?.status?.slug);
 
     const fetchStatus = async () => {
         const result = await axios.get("http://localhost:8080/api/orders/status")
@@ -163,6 +164,7 @@ const OrderForm = () => {
                                 label="Trạng thái"
                                 choices={filteredStatus}
                                 validate={req}
+                                disabled={currentStatusSlug === 'delivered'}
                             />
                         </Grid>
                     </Grid>

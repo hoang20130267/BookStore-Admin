@@ -2,25 +2,34 @@ import {
     BooleanField,
     CreateButton,
     DatagridConfigurable,
-    DateField,
     ExportButton,
+    FilterButton,
     List,
     NumberField,
     SearchInput,
     SelectColumnsButton,
     TextField,
-    TopToolbar
+    TopToolbar,
+    useTranslate
 } from "react-admin";
 import * as React from "react";
 import {Inventory} from "../../type";
+import {Chip} from '@mui/material';
+
+const QuickFilter = ({label, source, defaultValue}: { label: string, source?: string, defaultValue?: boolean }) => {
+    const translate = useTranslate();
+    return <Chip sx={{ marginBottom: 1 }} label={translate(label)} />;
+};
 
 const postFilters = [
     <SearchInput source="q" placeholder="Tìm kiếm" alwaysOn/>,
+    <QuickFilter source="active" label="Hết hàng" defaultValue={false} />,
 ];
 
 const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
+        <FilterButton/>
         <CreateButton/>
         <ExportButton/>
     </TopToolbar>
@@ -35,7 +44,7 @@ const rowStyle = (record: Inventory, index: number) => {
     }
 };
 export const InventoryList = () => (
-    <List sort={{field: 'id', order: 'ASC'}}
+    <List sort={{field: 'remainingQuantity', order: 'DESC'}}
           perPage={10}
           filters={postFilters}
           actions={<ListActions/>}
@@ -57,7 +66,7 @@ export const InventoryList = () => (
                          label="Giá bán"/>
             <NumberField source="importedQuantity" label="Số lượng nhập"/>
             <NumberField source="remainingQuantity" label="Số lượng còn lại"/>
-            <DateField source="createdAt" label="Ngày nhập"/>
+            <TextField source="createdAt" label="Ngày nhập"/>
             <BooleanField source="active" label="Trạng thái"/>
         </DatagridConfigurable>
     </List>

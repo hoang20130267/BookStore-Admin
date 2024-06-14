@@ -49,8 +49,11 @@ export const ProductCreate = () => {
     const validateMainImage = [required('Ảnh chính không được để trống')];
 
     const validateSubImages = (value: string | any[]) => {
-        if (value && value.length > 4) {
-            return 'Danh sách ảnh phụ không được vượt quá 4 ảnh';
+        if (!value || value.length === 0) {
+            return 'Danh sách ảnh phụ phải có ít nhất 1 ảnh';
+        }
+        if (value && value.length > 5) {
+            return 'Danh sách ảnh phụ không được vượt quá 5 ảnh';
         }
         return undefined;
     };
@@ -79,13 +82,13 @@ export const ProductCreate = () => {
                             <TextInput source="title" label="Tên sản phẩm" validate={req}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <ImageInput source="image" label="Ảnh chính" accept="image/*" validate={validateMainImage}>
+                            <ImageInput source="image" label="Ảnh chính" accept="image/*" validate={validateMainImage} placeholder="Thả ảnh để tải lên hoặc nhấp để chọn ảnh.">
                                 <ImageField source="src"/>
                             </ImageInput>
                         </Grid>
                         <Grid item xs={12}>
                             <ImageInput source="images" label="Danh sách ảnh phụ" accept="image/*" multiple
-                                        validate={validateSubImages}>
+                                        validate={validateSubImages} placeholder="Thả một số hình ảnh để tải lên hoặc nhấp để chọn một hình ảnh.">
                                 <ImageField source="src"/>
                             </ImageInput>
                         </Grid>
@@ -94,7 +97,7 @@ export const ProductCreate = () => {
                 <TabbedForm.Tab label="Chi tiết sản phẩm">
                     <Grid container>
                         <Grid item xs={12}>
-                            <TextInput source="detail.supplier" label="Nhà cung cấp" sx={{marginRight: '1em'}}/>
+                            <TextInput source="detail.supplier" label="Nhà cung cấp" sx={{marginRight: '1em'}} validate={req}/>
                             <TextInput source="detail.publisher" label="Nhà xuất bản"/>
                         </Grid>
                         <Grid item xs={12}>
@@ -112,10 +115,11 @@ export const ProductCreate = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <TextInput source="detail.size" label="Kích cỡ" sx={{marginRight: '1em'}}/>
-                            <NumberInput source="detail.quantityOfPage" label="Số trang" defaultValue={-1} validate={[minValue(-1)]}/>
+                            <NumberInput source="detail.quantityOfPage" label="Số trang" defaultValue={-1}
+                                         validate={[minValue(-1)]}/>
                         </Grid>
                         <Grid item xs={12}>
-                            <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth value={req}/>
+                            <RichTextInput source="detail.description" label="Mô tả sản phẩm" fullWidth validate={req}/>
                         </Grid>
                     </Grid>
                 </TabbedForm.Tab>
@@ -123,4 +127,4 @@ export const ProductCreate = () => {
         </Create>
     );
 };
-const req = [required()];
+const req = [required('Không được để trống')];

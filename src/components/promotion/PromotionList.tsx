@@ -15,6 +15,7 @@ import {
 import {Fragment, useCallback} from 'react';
 import {Divider, Tabs, Tab, Box} from '@mui/material';
 import DeleteButton from "../../layout/DeleteButton";
+import { makeStyles } from '@mui/styles';
 
 const VisitorListActions = () => (
     <TopToolbar>
@@ -23,6 +24,11 @@ const VisitorListActions = () => (
         <ExportButton/>
     </TopToolbar>
 );
+const useStyles = makeStyles({
+    selectedTab: {
+        backgroundColor: '#ff1493',
+    },
+});
 export const PromotionList = () => (
     <List sort={{field: 'id', order: 'ASC'}} perPage={5}
           actions={<VisitorListActions/>}
@@ -46,6 +52,7 @@ const tabs = [
     {id: '1', name: 'Voucher'},
 ];
 const TabbedDatagrid = () => {
+    const classes = useStyles();
     const listContext = useListContext();
     const {filterValues, setFilters, displayedFilters} = listContext;
 
@@ -87,6 +94,7 @@ const TabbedDatagrid = () => {
                         </span>
                         }
                         value={choice.id}
+                        classes={{ selected: classes.selectedTab }}
                     />
                 ))}
             </Tabs>

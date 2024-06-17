@@ -19,10 +19,11 @@ import * as React from "react";
 import DeleteButton from "../../layout/DeleteButton";
 import Box from "@mui/material/Box";
 
+const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
-        <CreateButton/>
+        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
         <ExportButton/>
     </TopToolbar>
 );
@@ -57,7 +58,7 @@ export const ProductList = () => (
             <BooleanField source="active" label="Trạng thái"/>
             <Box display={{xs: 'block', sm: 'flex', width: '100%'}}>
                 <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
-                    <EditButton/>
+                    {adminInfo.roles[0].description === 'ADMIN' && <EditButton />}
                 </Box>
             </Box>
         </DatagridConfigurable>

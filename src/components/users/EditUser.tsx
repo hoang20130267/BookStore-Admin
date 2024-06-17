@@ -17,9 +17,6 @@ export const validateForm = (values: Record<string, any>): Record<string, any> =
     if (!values.phone) {
         errors.phoneNumber = 'Vui lòng nhập số điện thoại';
     }
-    if (!values.image) {
-        errors.image = 'Vui lòng nhập đường dẫn ảnh đại diện';
-    }
     if (!values.email) {
         errors.email = 'Vui lòng nhập đúng định dạng email';
     } else {

@@ -3,13 +3,13 @@ import {SimpleForm, SelectInput, useGetList, required, ImageField, ImageInput} f
 import {Edit, TextInput} from "react-admin";
 import { RichTextInput } from 'ra-input-rich-text';
 import {useEffect, useState} from "react";
-import {Category} from "../../type";
+import {Category} from "../../types";
 import {Box} from "@mui/material";
 
 export const EditBlog = () => {
     const [category, setCategories] = useState<Category[]>([]);
     const [imageSelected, setImageSelected] = useState(false);
-    const {data}: any = useGetList<Category>('category', {
+    const {data}: any = useGetList<Category>('blogCate', {
         pagination: {page: 1, perPage: 100},
         sort: {field: 'name', order: 'ASC'},
     });

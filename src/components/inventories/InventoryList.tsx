@@ -16,6 +16,7 @@ import * as React from "react";
 import {Inventory} from "../../type";
 import {Chip} from '@mui/material';
 
+const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 const QuickFilter = ({label, source, defaultValue}: { label: string, source?: string, defaultValue?: boolean }) => {
     const translate = useTranslate();
     return <Chip sx={{ marginBottom: 1 }} label={translate(label)} />;
@@ -30,7 +31,7 @@ const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
         <FilterButton/>
-        <CreateButton/>
+        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
         <ExportButton/>
     </TopToolbar>
 );

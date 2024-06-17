@@ -36,17 +36,17 @@ const NewCustomers = () => {
             <CardWithIcon
                 to="/user"
                 icon={CustomerIcon}
-                title={"Người dùng"}
+                title={"Người dùng mới"}
                 subtitle={
                     <WithListContext render={({ total }) => <>{total}</>} />
                 }
             >
                 <SimpleList<User>
                     primaryText={record => `${record.userInfo.fullName}`}
-                    leftAvatar={customer => (
+                    leftAvatar={record => (
                         <Avatar
-                            src={`${customer.userInfo.avatar}?size=32x32`}
-                            alt={`${customer.userInfo.fullName}`}
+                            src={`${record.userInfo.avatar}?size=32x32`}
+                            alt={`${record.userInfo.fullName}`}
                         />
                     )}
                 />

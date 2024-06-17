@@ -14,11 +14,11 @@ import {
     BooleanField
 } from "react-admin";
 import {Avatar, Box} from '@mui/material';
-import DeleteButton from "../../layout/DeleteButton";
+const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 
 const VisitorListActions = () => (
     <TopToolbar>
-        <CreateButton/>
+        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
         <SelectColumnsButton/>
         <ExportButton/>
     </TopToolbar>
@@ -71,10 +71,11 @@ export const UserList = () => (
                     <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
                         <ShowButton/>
                     </Box>
-                    <EditButton/>
+                    {adminInfo.roles[0].description === 'ADMIN' &&
                     <Box flex={1} ml={{xs: 0, sm: '0.5em'}}>
-                        <DeleteButton param={"người dùng"}/>
+                        <EditButton/>
                     </Box>
+                    }
                 </Box>
             </ArrayField>
         </DatagridConfigurable>

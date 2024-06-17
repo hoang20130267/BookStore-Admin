@@ -12,11 +12,11 @@ import {
     DateField,
     EditButton,
 } from "react-admin";
-import DeleteButton from "../../layout/DeleteButton";
+const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 
 const VisitorListActions = () => (
     <TopToolbar>
-        <CreateButton/>
+        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
         <SelectColumnsButton/>
         <ExportButton/>
     </TopToolbar>
@@ -52,8 +52,7 @@ export const BlogCateList = () => (
             <DateField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedBy.userInfo.fullName" label="Người cập nhật"/>
             <DateField source="updatedAt" label="Ngày cập nhật"/>
-            <EditButton />
-            <DeleteButton param={"danh mục tin tức"}/>
+            {adminInfo.roles[0].description === 'ADMIN' && <EditButton />}
         </DatagridConfigurable>
     </List>
 );

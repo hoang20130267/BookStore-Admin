@@ -5,15 +5,12 @@ import {Category} from "../../type";
 import {Box} from "@mui/material";
 
 export const validateForm = (
-    values: Record<string, any>
+    values: Record<string, any>,
 ): Record<string, any> => {
     const errors = {} as any;
     if (!values.idProduct && !values.code) {
         errors.idProduct = 'Vui lòng chọn sản phẩm hoặc nhập mã giảm giá';
         errors.code = 'Vui lòng chọn sản phẩm hoặc nhập mã giảm giá';
-    }
-    if (!values.discount) {
-        errors.discount = 'Vui lòng chọn phần trăm giảm giá';
     }
     if (!values.discount) {
         errors.discount = 'Vui lòng chọn phần trăm giảm giá';
@@ -23,13 +20,13 @@ export const validateForm = (
     if (!values.startDate) {
         errors.startDate = 'Vui lòng chọn ngày bắt đầu';
     }
-    if(!values.endDate) {
+    if (!values.endDate) {
         errors.endDate = 'Vui lòng chọn ngày kết thúc';
     }
-    if(new Date(values.startDate) < new Date()) {
+    if (new Date(values.startDate) < new Date()) {
         errors.startDate = 'Ngày bắt đầu phải sau ngày hiện tại';
     }
-    if(new Date(values.endDate) <= new Date(values.startDate)) {
+    if (new Date(values.endDate) <= new Date(values.startDate)) {
         errors.endDate = 'Ngày kết thúc phải sau ngày bắt đầu';
     }
     return errors;

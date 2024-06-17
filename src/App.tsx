@@ -42,6 +42,7 @@ import PromotionCreate from "./components/promotion/PromotionCreate";
 import PromotionEdit from "./components/promotion/PromotionEdit";
 import OrderEdit from "./components/orders/OrderEdit";
 import {Dashboard} from "./components/dashboard";
+import { BlogShow } from "./components/blogs/BlogShow";
 
 function App() {
     useTokenCheck(authProvider, 300000);
@@ -62,6 +63,7 @@ function App() {
                       edit={EditUser}/>
             <Resource name={'blog'} icon={ArticleIcon} list={BlogList}
                       options={{label: "Bài viết"}}
+                      show={BlogShow}
                       create={CreateBlog}
                       edit={EditBlog}/>
             <Resource name={'blogCate'} icon={ArticleIcon} list={BlogCateList}

@@ -48,11 +48,16 @@ export const dataProvider: DataProvider = {
                 json.blogCate = json.blogCate.id;
             }
             if (resource === 'user') {
-                json.avatarShow = json.avatar;
+                json.avatarShow = json.userInfo.avatar;
+                json.fullName = json.userInfo.fullName;
+                json.phone = json.userInfo.phoneNumber;
+                json.role = json.roles[0].id;
+
             }
             if (resource === 'promotion' && json.product !== null) {
                 json.idProduct = json.product.id;
             }
+            console.log(json);
             return ({
                 data: json
             })
@@ -342,6 +347,7 @@ export const dataProvider: DataProvider = {
             const response = await httpClient(`${apiUrl}/${resource}/delete/${params.id}`, {
                 method: 'DELETE',
                 headers: new Headers({
+                    'Authorization': `${adminInfo.type} ${adminInfo.token}`,
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
                 }),

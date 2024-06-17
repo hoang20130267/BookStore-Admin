@@ -9,12 +9,12 @@ import {
     TextField,
     TopToolbar
 } from "react-admin";
-import DeleteButton from "../../layout/DeleteButton";
-
+import * as React from "react";
+const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
-        <CreateButton/>
+        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
         <ExportButton/>
     </TopToolbar>
 );
@@ -34,8 +34,7 @@ const CategoryList = () => (
             <TextField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedBy.username" label="Cập nhật bởi"/>
             <TextField source="updatedAt" label="Ngày cập nhật"/>
-            <EditButton/>
-            <DeleteButton param={"danh mục sản phẩm"}/>
+            {adminInfo.roles[0].description === 'ADMIN' && <EditButton />}
         </DatagridConfigurable>
     </List>
 );

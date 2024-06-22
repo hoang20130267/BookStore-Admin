@@ -9,7 +9,7 @@ interface Props {
 const NbNewOrders = ({ nbNewOrders }: Props) => {
     return (
         <CardWithIcon
-            to="/orders"
+            to={`/orders?filter=%7B"slug"%3A"pending"%7D`}
             icon={ShoppingCartIcon}
             title="Đơn hàng mới"
             subtitle={nbNewOrders}

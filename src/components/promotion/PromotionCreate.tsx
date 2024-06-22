@@ -50,7 +50,7 @@ const PromotionCreate = () => {
         const code = event.target.value;
         if (code) {
             try {
-                const response = await axios.get(`http://localhost:8080/api/promotion/check/${code}`);
+                const response = await axios.get(`${process.env.REACT_APP_ENDPOINT_API}/promotion/check/${code}`);
                 if (response.data === 'Voucher code đã tồn tại') {
                     setCodeError('Mã giảm giá đã tồn tại');
                 } else {

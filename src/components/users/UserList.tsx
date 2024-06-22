@@ -18,7 +18,7 @@ const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 
 const VisitorListActions = () => (
     <TopToolbar>
-        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
+        {adminInfo.roles[0] === 'ADMIN' && <CreateButton/>}
         <SelectColumnsButton/>
         <ExportButton/>
     </TopToolbar>
@@ -71,7 +71,7 @@ export const UserList = () => (
                     <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
                         <ShowButton/>
                     </Box>
-                    {adminInfo.roles[0].description === 'ADMIN' &&
+                    {adminInfo.roles[0] === 'ADMIN' &&
                     <Box flex={1} ml={{xs: 0, sm: '0.5em'}}>
                         <EditButton/>
                     </Box>

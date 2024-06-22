@@ -13,10 +13,11 @@ import {
     EditButton,
 } from "react-admin";
 const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
+console.log(adminInfo.roles[0])
 
 const VisitorListActions = () => (
     <TopToolbar>
-        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
+        {adminInfo.roles[0] === 'ADMIN' && <CreateButton/>}
         <SelectColumnsButton/>
         <ExportButton/>
     </TopToolbar>
@@ -52,7 +53,7 @@ export const BlogCateList = () => (
             <DateField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedBy.userInfo.fullName" label="Người cập nhật"/>
             <DateField source="updatedAt" label="Ngày cập nhật"/>
-            {adminInfo.roles[0].description === 'ADMIN' && <EditButton />}
+            {adminInfo.roles[0] === 'ADMIN' && <EditButton />}
         </DatagridConfigurable>
     </List>
 );

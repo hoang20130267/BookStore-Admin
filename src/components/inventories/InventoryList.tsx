@@ -31,7 +31,7 @@ const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
         <FilterButton/>
-        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
+        {adminInfo.roles[0] === 'ADMIN' && <CreateButton/>}
         <ExportButton/>
     </TopToolbar>
 );

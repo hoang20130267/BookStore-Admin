@@ -14,7 +14,7 @@ const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
-        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
+        {adminInfo.roles[0] === 'ADMIN' && <CreateButton/>}
         <ExportButton/>
     </TopToolbar>
 );
@@ -34,7 +34,7 @@ const CategoryList = () => (
             <TextField source="createdAt" label="Ngày tạo"/>
             <TextField source="updatedBy.username" label="Cập nhật bởi"/>
             <TextField source="updatedAt" label="Ngày cập nhật"/>
-            {adminInfo.roles[0].description === 'ADMIN' && <EditButton />}
+            {adminInfo.roles[0] === 'ADMIN' && <EditButton />}
         </DatagridConfigurable>
     </List>
 );

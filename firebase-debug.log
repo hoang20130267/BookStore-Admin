@@ -1,0 +1,55 @@
+[debug] [2024-06-21T16:39:46.302Z] ----------------------------------------------------------------------
+[debug] [2024-06-21T16:39:46.314Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Shuter\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2024-06-21T16:39:46.314Z] CLI Version:   13.11.2
+[debug] [2024-06-21T16:39:46.314Z] Platform:      win32
+[debug] [2024-06-21T16:39:46.315Z] Node Version:  v20.11.1
+[debug] [2024-06-21T16:39:46.315Z] Time:          Fri Jun 21 2024 23:39:46 GMT+0700 (Indochina Time)
+[debug] [2024-06-21T16:39:46.315Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-06-21T16:39:46.320Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2024-06-21T16:39:46.472Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-06-21T16:39:46.472Z] > authorizing via signed-in user (goldleaf.cdw@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Shuter\WebstormProjects\bookstore-admin
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[debug] [2024-06-21T16:39:46.996Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2024-06-21T16:39:46.996Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-06-21T16:39:56.593Z] Using project from CLI flag: online-bookstore-admin-6301a
+[debug] [2024-06-21T16:39:56.594Z] > refreshing access token with scopes: []
+[debug] [2024-06-21T16:39:56.595Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-06-21T16:39:56.595Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-06-21T16:39:56.834Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-06-21T16:39:56.834Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-06-21T16:39:56.841Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/online-bookstore-admin-6301a [none]
+[debug] [2024-06-21T16:39:57.239Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/online-bookstore-admin-6301a 200
+[debug] [2024-06-21T16:39:57.240Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/online-bookstore-admin-6301a {"projectId":"online-bookstore-admin-6301a","projectNumber":"975283689434","displayName":"Online-Bookstore-Admin","name":"projects/online-bookstore-admin-6301a","resources":{"hostingSite":"online-bookstore-admin-6301a"},"state":"ACTIVE","etag":"1_6ccf15c0-93ac-41ee-b9de-e1eaab379686"}
+[info] i  Using project online-bookstore-admin-6301a (Online-Bookstore-Admin) 
+[info] 
+=== Hosting Setup
+[debug] [2024-06-21T16:39:57.247Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/online-bookstore-admin-6301a [none]
+[debug] [2024-06-21T16:39:57.534Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/online-bookstore-admin-6301a 200
+[debug] [2024-06-21T16:39:57.534Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/online-bookstore-admin-6301a {"projectId":"online-bookstore-admin-6301a","projectNumber":"975283689434","displayName":"Online-Bookstore-Admin","name":"projects/online-bookstore-admin-6301a","resources":{"hostingSite":"online-bookstore-admin-6301a"},"state":"ACTIVE","etag":"1_6ccf15c0-93ac-41ee-b9de-e1eaab379686"}
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

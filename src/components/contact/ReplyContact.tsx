@@ -18,7 +18,7 @@ export const validateForm = (values: Record<string, any>): Record<string, any> =
 };
 export const ReplyContact = () => {
     const {id} = useParams<{ id: string }>();
-    const response = new Request(`http://localhost:8080/api/contact/check-reply/${id}`, {
+    const response = new Request(`${process.env.REACT_APP_ENDPOINT_API}/contact/check-reply/${id}`, {
         method: 'GET',
         headers: new Headers({'Content-Type': 'application/json'}),
     });

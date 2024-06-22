@@ -130,7 +130,7 @@ const OrderForm = () => {
     const [currentStatusSlug, setCurrentStatusSlug] = useState<string>(record?.status?.slug);
 
     const fetchStatus = async () => {
-        const result = await axios.get("http://localhost:8080/api/orders/status")
+        const result = await axios.get(`${process.env.REACT_APP_ENDPOINT_API}/orders/status`)
         if (result.data) {
             setStatus(result.data);
         }

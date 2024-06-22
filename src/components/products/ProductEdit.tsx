@@ -111,11 +111,20 @@ export const ProductEdit = () => {
                                 onChange={(e) => setSelectedMainCategory(e.target.value)}
                             />
                             <SelectInput
+                                sx={{marginRight: '20px'}}
                                 source="category.id"
                                 label="Danh mục"
                                 choices={subCategories}
-                                validate={req}
                                 value={record?.category?.id}
+                            />
+                            <SelectInput
+                                source="active"
+                                label="Trạng thái"
+                                validate={req}
+                                choices={[
+                                    {id: true, name: 'Hiển thị'},
+                                    {id: false, name: 'Ẩn'},
+                                ]}
                             />
                         </Grid>
                         <Grid item xs={12}>

@@ -1,6 +1,6 @@
 import {DataProvider, fetchUtils} from 'react-admin'
 
-const apiUrl = 'http://localhost:8080/api'
+const apiUrl = `${process.env.REACT_APP_ENDPOINT_API}`
 const httpClient = fetchUtils.fetchJson
 const adminInfo = JSON.parse(localStorage.getItem('auth') || '{}');
 // @ts-ignore

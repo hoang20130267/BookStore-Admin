@@ -25,7 +25,7 @@ const ListActions = () => (
     <TopToolbar>
         <SelectColumnsButton/>
         <FilterButton/>
-        {adminInfo.roles[0].description === 'ADMIN' && <CreateButton/>}
+        {adminInfo.roles[0] === 'ADMIN' && <CreateButton/>}
         <ExportButton/>
     </TopToolbar>
 );
@@ -68,7 +68,7 @@ export const ProductList = () => (
             <BooleanField source="active" label="Trạng thái"/>
             <Box display={{xs: 'block', sm: 'flex', width: '100%'}}>
                 <Box flex={1} mr={{xs: 0, sm: '0.5em'}}>
-                    {adminInfo.roles[0].description === 'ADMIN' && <EditButton />}
+                    {adminInfo.roles[0] === 'ADMIN' && <EditButton />}
                 </Box>
             </Box>
         </DatagridConfigurable>
